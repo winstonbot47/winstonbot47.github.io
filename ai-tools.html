@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tools Directory 2025–2026 | Curated for Technical Leaders</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-primary:#0f1729;
+  --bg-secondary:#1a2332;
+  --bg-card:#1e2a3a;
+  --bg-card-hover:#243244;
+  --text-primary:#e8edf5;
+  --text-secondary:#8b99b0;
+  --text-muted:#5a6a80;
+  --accent-blue:#3b82f6;
+  --accent-purple:#8b5cf6;
+  --accent-green:#10b981;
+  --accent-orange:#f59e0b;
+  --accent-red:#ef4444;
+  --accent-pink:#ec4899;
+  --accent-cyan:#06b6d4;
+  --accent-indigo:#6366f1;
+  --accent-lime:#84cc16;
+  --accent-teal:#14b8a6;
+  --accent-rose:#f43f5e;
+  --accent-amber:#f59e0b;
+  --border-color:#2a3a4e;
+  --radius:12px;
+  --shadow:0 4px 24px rgba(0,0,0,.3);
+  --shadow-hover:0 8px 40px rgba(0,0,0,.5);
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-mono:"SF Mono",Monaco,"Cascadia Code",Consolas,monospace;
+}
+html{scroll-behavior:smooth;scroll-padding-top:140px}
+body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-blue);text-decoration:none;transition:color .2s}
+a:hover{color:#60a5fa}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(15,23,41,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-color)}
+.header-top{max-width:1400px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-size:1.25rem;font-weight:700;color:var(--text-primary);white-space:nowrap}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+.logo span{color:var(--accent-blue)}
+.header-meta{font-size:.8rem;color:var(--text-muted);text-align:right}
+
+/* Search */
+.search-wrap{position:relative;flex:1;max-width:500px;min-width:200px}
+.search-wrap input{width:100%;padding:10px 16px 10px 42px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:8px;color:var(--text-primary);font-size:.9rem;outline:none;transition:border-color .2s}
+.search-wrap input:focus{border-color:var(--accent-blue)}
+.search-wrap input::placeholder{color:var(--text-muted)}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:1rem;pointer-events:none}
+
+/* Category Tabs */
+.cat-tabs-wrap{background:rgba(15,23,41,.6);border-bottom:1px solid var(--border-color)}
+.cat-tabs{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cat-tabs::-webkit-scrollbar{display:none}
+.cat-tab{padding:10px 16px;font-size:.82rem;font-weight:500;color:var(--text-secondary);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;flex-shrink:0;user-select:none}
+.cat-tab:hover{color:var(--text-primary)}
+.cat-tab.active{color:var(--accent-blue);border-bottom-color:var(--accent-blue)}
+
+/* Sort Bar */
+.controls-bar{max-width:1400px;margin:0 auto;padding:16px 24px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.result-count{font-size:.85rem;color:var(--text-secondary)}
+.sort-controls{display:flex;gap:8px;align-items:center}
+.sort-controls label{font-size:.82rem;color:var(--text-muted)}
+.sort-controls select{padding:6px 12px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:.82rem;cursor:pointer;outline:none}
+.sort-controls select:focus{border-color:var(--accent-blue)}
+
+/* Main */
+main{max-width:1400px;margin:0 auto;padding:24px}
+
+/* Section headers */
+.section-header{display:flex;align-items:center;gap:12px;margin:32px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--border-color)}
+.section-header:first-child{margin-top:0}
+.section-header h2{font-size:1.3rem;font-weight:700;color:var(--text-primary)}
+.section-header .section-count{background:var(--bg-secondary);padding:2px 10px;border-radius:20px;font-size:.75rem;color:var(--text-secondary);font-weight:500}
+
+/* Trending Section */
+.trending-section{margin-bottom:36px}
+.trending-section h2{font-size:1.4rem}
+.trending-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+
+/* Card Grid */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;margin-bottom:8px}
+
+/* Card */
+.tool-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius);padding:20px;transition:all .25s ease;cursor:default;position:relative;display:flex;flex-direction:column}
+.tool-card:hover{background:var(--bg-card-hover);border-color:rgba(59,130,246,.3);box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.tool-card.hidden{display:none}
+
+.card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px}
+.tool-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff;flex-shrink:0;position:relative}
+.card-header{flex:1;min-width:0}
+.tool-name{font-size:1.05rem;font-weight:700;color:var(--text-primary);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tool-name a{color:inherit}
+.tool-name a:hover{color:var(--accent-blue)}
+.tool-desc{font-size:.84rem;color:var(--text-secondary);margin-top:2px;line-height:1.5}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.3px;line-height:1.6}
+.badge-hot{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+.badge-new{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.2)}
+.badge-trending{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+
+.cat-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;letter-spacing:.2px;margin-top:8px}
+
+.price-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;background:var(--bg-secondary);color:var(--text-secondary);border:1px solid var(--border-color);margin-top:8px}
+.price-free{background:rgba(16,185,129,.1);color:#34d399;border-color:rgba(16,185,129,.2)}
+.price-freemium{background:rgba(59,130,246,.1);color:#60a5fa;border-color:rgba(59,130,246,.2)}
+.price-paid{background:rgba(245,158,11,.1);color:#fbbf24;border-color:rgba(245,158,11,.2)}
+.price-enterprise{background:rgba(139,92,246,.1);color:#a78bfa;border-color:rgba(139,92,246,.2)}
+
+.card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:12px;flex-wrap:wrap}
+.best-for{font-size:.78rem;color:var(--text-muted);font-style:italic;flex:1}
+.card-link{font-size:.78rem;color:var(--accent-blue);font-weight:500;white-space:nowrap}
+.card-link:hover{text-decoration:underline}
+
+/* Category colors */
+.cat-coding{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.2)}
+.cat-builders{background:rgba(139,92,246,.15);color:#a78bfa;border:1px solid rgba(139,92,246,.2)}
+.cat-models{background:rgba(236,72,153,.15);color:#f472b6;border:1px solid rgba(236,72,153,.2)}
+.cat-writing{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.2)}
+.cat-image{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.cat-video{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+.cat-voice{background:rgba(6,182,212,.15);color:#22d3ee;border:1px solid rgba(6,182,212,.2)}
+.cat-data{background:rgba(132,204,22,.15);color:#a3e635;border:1px solid rgba(132,204,22,.2)}
+.cat-automation{background:rgba(99,102,241,.15);color:#818cf8;border:1px solid rgba(99,102,241,.2)}
+.cat-search{background:rgba(20,184,166,.15);color:#2dd4bf;border:1px solid rgba(20,184,166,.2)}
+.cat-productivity{background:rgba(244,63,94,.15);color:#fb7185;border:1px solid rgba(244,63,94,.2)}
+.cat-specialized{background:rgba(148,163,184,.15);color:#94a3b8;border:1px solid rgba(148,163,184,.2)}
+
+/* Icon BG colors */
+.icon-blue{background:linear-gradient(135deg,#3b82f6,#2563eb)}
+.icon-purple{background:linear-gradient(135deg,#8b5cf6,#7c3aed)}
+.icon-green{background:linear-gradient(135deg,#10b981,#059669)}
+.icon-orange{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.icon-red{background:linear-gradient(135deg,#ef4444,#dc2626)}
+.icon-pink{background:linear-gradient(135deg,#ec4899,#db2777)}
+.icon-cyan{background:linear-gradient(135deg,#06b6d4,#0891b2)}
+.icon-indigo{background:linear-gradient(135deg,#6366f1,#4f46e5)}
+.icon-lime{background:linear-gradient(135deg,#84cc16,#65a30d)}
+.icon-teal{background:linear-gradient(135deg,#14b8a6,#0d9488)}
+.icon-rose{background:linear-gradient(135deg,#f43f5e,#e11d48)}
+.icon-amber{background:linear-gradient(135deg,#f59e0b,#b45309)}
+.icon-slate{background:linear-gradient(135deg,#64748b,#475569)}
+.icon-emerald{background:linear-gradient(135deg,#34d399,#059669)}
+.icon-sky{background:linear-gradient(135deg,#0ea5e9,#0284c7)}
+.icon-violet{background:linear-gradient(135deg,#a78bfa,#7c3aed)}
+.icon-fuchsia{background:linear-gradient(135deg,#d946ef,#a21caf)}
+.icon-yellow{background:linear-gradient(135deg,#eab308,#ca8a04)}
+.icon-dark{background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid var(--border-color)}
+
+/* No results */
+.no-results{text-align:center;padding:60px 24px;color:var(--text-muted);font-size:1.1rem;display:none}
+.no-results.visible{display:block}
+
+/* Footer */
+.site-footer{max-width:1400px;margin:40px auto 0;padding:24px;border-top:1px solid var(--border-color);text-align:center;color:var(--text-muted);font-size:.8rem}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg-primary)}
+::-webkit-scrollbar-thumb{background:var(--border-color);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:#3a4a5e}
+
+/* Responsive */
+@media(max-width:768px){
+  .header-top{flex-direction:column;align-items:stretch;gap:12px}
+  .search-wrap{max-width:100%}
+  .header-meta{text-align:center}
+  .card-grid,.trending-grid{grid-template-columns:1fr}
+  main{padding:16px}
+  .section-header h2{font-size:1.1rem}
+  .controls-bar{flex-direction:column;align-items:stretch}
+}
+@media(min-width:769px) and (max-width:1024px){
+  .card-grid{grid-template-columns:repeat(2,1fr)}
+  .trending-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Animations */
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.tool-card{animation:fadeIn .3s ease forwards}
+
+/* Trending card special */
+.trending-card{border-left:3px solid var(--accent-orange)}
+.trending-card .tool-icon::after{content:"🔥";position:absolute;bottom:-4px;right:-4px;font-size:14px}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-icon">⚡</div>
+      AI Tools <span>Directory</span>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search tools by name, category, or use case..." autocomplete="off">
+    </div>
+    <div class="header-meta">
+      Curated for Technical Leaders<br>
+      <strong>74 Tools</strong> · Updated April 2026
+    </div>
+  </div>
+  <div class="cat-tabs-wrap">
+    <div class="cat-tabs" id="catTabs">
+      <div class="cat-tab active" data-cat="all">All Tools</div>
+      <div class="cat-tab" data-cat="trending">🔥 Trending</div>
+      <div class="cat-tab" data-cat="coding">Coding & Dev</div>
+      <div class="cat-tab" data-cat="builders">App/UI Builders</div>
+      <div class="cat-tab" data-cat="models">AI Models</div>
+      <div class="cat-tab" data-cat="writing">Writing</div>
+      <div class="cat-tab" data-cat="image">Image Gen</div>
+      <div class="cat-tab" data-cat="video">Video Gen</div>
+      <div class="cat-tab" data-cat="voice">Voice & Audio</div>
+      <div class="cat-tab" data-cat="data">Data & Analytics</div>
+      <div class="cat-tab" data-cat="automation">Automation & Agents</div>
+      <div class="cat-tab" data-cat="search">Search & Research</div>
+      <div class="cat-tab" data-cat="productivity">Productivity</div>
+      <div class="cat-tab" data-cat="specialized">Specialized</div>
+    </div>
+  </div>
+</header>
+
+<div class="controls-bar">
+  <div class="result-count" id="resultCount">Showing 74 tools</div>
+  <div class="sort-controls">
+    <label for="sortSelect">Sort by:</label>
+    <select id="sortSelect">
+      <option value="default">Featured</option>
+      <option value="name">Name A–Z</option>
+      <option value="name-desc">Name Z–A</option>
+      <option value="price-asc">Price: Free first</option>
+      <option value="price-desc">Price: Enterprise first</option>
+      <option value="category">Category</option>
+      <option value="use-case">Use case</option>
+    </select>
+  </div>
+</div>
+
+<main id="mainContent">
+
+  <!-- Trending Section -->
+  <section class="trending-section" id="trendingSection">
+    <div class="section-header">
+      <h2>🔥 Trending Now</h2>
+      <span class="section-count">Top 10</span>
+    </div>
+    <div class="trending-grid" id="trendingGrid"></div>
+  </section>
+
+  <!-- All Tools by Category -->
+  <div id="allToolsSections"></div>
+
+  <div class="no-results" id="noResults">
+    No tools match your search. Try a different keyword.
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  AI Tools Directory · Curated April 2026 · Prices and features subject to change · No external dependencies<br>
+  Built with care for technical decision-makers. All trademarks belong to their respective owners.
+</footer>
+
+<script>
+// ============================================================
+// TOOL DATA
+// ============================================================
+const tools = [
+  // ─── CODING & DEVELOPMENT ───
+  {
+    name:"Cursor",
+    icon:"Cu",
+    iconClass:"icon-blue",
+    desc:"AI-first code editor built on VS Code with integrated agent, tab completions, and multi-model support.",
+    bestFor:"Full-stack AI-assisted development",
+    category:"coding",
+    catLabel:"Coding & Dev",
+    catClass:"cat-coding",
+    pricing:"freemium",
+    priceNote:"Free / $20–$200/mo",
+    url:"https://cursor.com",
+    badges:["hot"],
+    trending:true,
+    trendRank:1
+  },
+  {
+    name:"GitHub Copilot",
+    icon:"GH",
+    iconClass:"icon-dark",
+    desc:"AI pair programmer by GitHub/Microsoft with code completion, agent mode, PR reviews, and cloud agents.",
+    bestFor:"Developers in VS Code/JetBrains ecosystems",
+    category:"coding",
+    catLabel:"Coding & Dev",
+    catClass:"cat-coding",
+    pricing:"freemium",
+    priceNote:"Free / $10–$39/mo",
+    url:"https://github.com/features/copilot",
+    badges:["hot"],
+    trending:true,
+    trendRank:3
+  },
+  {
+    name:"Windsurf",
+    icon:"Ws",
+    iconClass:"icon-cyan",
+    desc:"AI-powered IDE (formerly Codeium) with Cascade agent for autonomous multi-file editing and deep codebase understanding.",
+    bestFor:"Autonomous code generation & refactoring",
+    category:"coding",
+    catLabel:"Coding & Dev",
+    catClass:"cat-coding",
+    pricing:"freemium",
+    priceNote:"Free / $15/mo",
+    url:"https://windsurf.com",
+    badges:["hot"],
+    trending:false
+  },
+  {
+    name:"Claude Code",
+    icon:"CC",
+    iconClass:"icon-amber",
+    desc:"Anthropic's agentic CLI coding tool. Runs in your terminal, understands full repos, executes shell commands.",
+    bestFor:"Terminal-native developers, complex refactors",
+    category:"coding",
+    catLabel:"Coding & Dev",
+    catClass:"cat-coding",
+    pricing:"paid",
+    priceNote:"Via Claude subscription",
+    url:"https://docs.anthropic.com/en/docs/claude-code",
+    badges:["hot","new"],
+    trending:true,
+    trendRank:2
+  },
+  {
+    name:"OpenAI Codex",
+    icon:"Cx",
+    iconClass:"icon-green",
+    desc:"Cloud-based coding agent from OpenAI that runs tasks in sandboxed environments with full repo context.",
+    bestFor:"Async coding tasks, CI/CD integration",
+    category:"coding",
+    catLabel:"Coding & Dev",
+    catClass:"cat-coding",
+    pricing:"paid",
+    priceNote:"Via ChatGPT Pro/API",
+    url:"https://openai.com/index/introducing-codex/",
+    badges:["new"],
+    trending:true,
+    trendRank:6
+  },
+  {
+    name:"Bolt.new",
+    icon:"⚡",
+    iconClass:"icon-purple",
+    desc:"Prompt-to-app builder by StackBlitz. Generates, runs, and deploys full-stack web apps in the browser.",
+    bestFor:"Rapid prototyping, MVPs from a prompt",
+    category:"coding",
+    catLabel:"Coding & Dev",
+    catClass:"cat-coding",
+    pricing:"freemium",
+    priceNote:"Free / $20–$200/mo",
+    url:"https://bolt.new",
+    badges:["hot"],
+    trending:false
+  },
+  {
+    name:"Lovable",
+    icon:"💜",
+    iconClass:"icon-fuchsia",
+    desc:"AI full-stack engineer that builds production-grade web apps from natural language with Supabase backend integration.",
+    bestFor:"Non-technical founders, product managers",
+    category:"coding",
+    catLabel:"Coding & Dev",
+    catClass:"cat-coding",
+    pricing:"freemium",
+    priceNote:"Free / $20–$100/mo",
+    url:"https://lovable.dev",
+    badges:["hot"],
+    trending:false
+  },
+  {
+    name:"Replit Agent",
+    icon:"R",
+    iconClass:"icon-orange",
+    desc:"AI agent inside Replit that builds, debugs, and deploys applications from natural language prompts.",
+    bestFor:"Learning, rapid prototyping, deployment",
+    category:"coding",
+    catLabel:"Coding & Dev",
+    catClass:"cat-coding",
+    pricing:"freemium",
+    priceNote:"Free / $25/mo",
+    url:"https://replit.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"v0 by Vercel",
+    icon:"v0",
+    iconClass:"icon-dark",
+    desc:"AI-powered UI generator that creates React/Next.js components from text prompts using shadcn/ui.",
+    bestFor:"Frontend devs, rapid UI prototyping",
+    category:"coding",
+    catLabel:"Coding & Dev",
+    catClass:"cat-coding",
+    pricing:"freemium",
+    priceNote:"Free / $20/mo",
+    url:"https://v0.dev",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Aider",
+    icon:"Ai",
+    iconClass:"icon-lime",
+    desc:"Open-source AI pair programmer in your terminal. Works with any LLM, handles multi-file edits with git integration.",
+    bestFor:"Open-source advocates, git-heavy workflows",
+    category:"coding",
+    catLabel:"Coding & Dev",
+    catClass:"cat-coding",
+    pricing:"free",
+    priceNote:"Free (open source)",
+    url:"https://aider.chat",
+    badges:[],
+    trending:false
+  },
+
+  // ─── APP/UI BUILDERS ───
+  {
+    name:"Webflow AI",
+    icon:"Wf",
+    iconClass:"icon-blue",
+    desc:"AI-powered visual web design platform. Generates layouts, copy, and styles from prompts within Webflow's no-code builder.",
+    bestFor:"Designers building production websites",
+    category:"builders",
+    catLabel:"App/UI Builders",
+    catClass:"cat-builders",
+    pricing:"freemium",
+    priceNote:"Free / $14–$39/mo",
+    url:"https://webflow.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Framer AI",
+    icon:"Fr",
+    iconClass:"icon-purple",
+    desc:"AI-native website builder that generates complete, responsive sites from text descriptions with built-in CMS.",
+    bestFor:"Marketing sites, landing pages, portfolios",
+    category:"builders",
+    catLabel:"App/UI Builders",
+    catClass:"cat-builders",
+    pricing:"freemium",
+    priceNote:"Free / $5–$30/mo",
+    url:"https://framer.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Builder.io",
+    icon:"Bi",
+    iconClass:"icon-indigo",
+    desc:"Visual development platform with AI. Generates and edits UI components, integrates with React/Vue/Angular.",
+    bestFor:"Enterprise visual content management",
+    category:"builders",
+    catLabel:"App/UI Builders",
+    catClass:"cat-builders",
+    pricing:"freemium",
+    priceNote:"Free / $19–$199/mo",
+    url:"https://builder.io",
+    badges:[],
+    trending:false
+  },
+
+  // ─── AI MODELS / FOUNDATIONS ───
+  {
+    name:"GPT-5",
+    icon:"G5",
+    iconClass:"icon-green",
+    desc:"OpenAI's latest frontier model. Massive reasoning improvements, native tool use, extended context, multimodal.",
+    bestFor:"General-purpose AI, complex reasoning tasks",
+    category:"models",
+    catLabel:"AI Models",
+    catClass:"cat-models",
+    pricing:"freemium",
+    priceNote:"Free tier / $20–$200/mo via ChatGPT",
+    url:"https://openai.com",
+    badges:["hot","new"],
+    trending:true,
+    trendRank:4
+  },
+  {
+    name:"Claude 4 (Opus & Sonnet)",
+    icon:"C4",
+    iconClass:"icon-amber",
+    desc:"Anthropic's flagship models. Opus 4 leads in coding/agentic tasks; Sonnet 4 balances speed and capability.",
+    bestFor:"Coding, agentic workflows, long-context analysis",
+    category:"models",
+    catLabel:"AI Models",
+    catClass:"cat-models",
+    pricing:"freemium",
+    priceNote:"Free tier / $20–$200/mo / API",
+    url:"https://anthropic.com",
+    badges:["hot","new"],
+    trending:true,
+    trendRank:5
+  },
+  {
+    name:"Gemini 2.5 Pro",
+    icon:"Gm",
+    iconClass:"icon-blue",
+    desc:"Google's top-tier model with massive 1M+ token context, native multimodal, and built-in Google Search grounding.",
+    bestFor:"Long-document analysis, multimodal reasoning",
+    category:"models",
+    catLabel:"AI Models",
+    catClass:"cat-models",
+    pricing:"freemium",
+    priceNote:"Free / $20/mo Google One AI Premium",
+    url:"https://deepmind.google/technologies/gemini/",
+    badges:["hot"],
+    trending:false
+  },
+  {
+    name:"Grok 3",
+    icon:"Gk",
+    iconClass:"icon-dark",
+    desc:"xAI's latest model with real-time X/Twitter data access, strong reasoning, and competitive benchmark performance.",
+    bestFor:"Real-time info, unfiltered analysis",
+    category:"models",
+    catLabel:"AI Models",
+    catClass:"cat-models",
+    pricing:"freemium",
+    priceNote:"Free / $30–$50/mo via SuperGrok",
+    url:"https://x.ai",
+    badges:["new"],
+    trending:false
+  },
+  {
+    name:"Llama 4",
+    icon:"Ll",
+    iconClass:"icon-indigo",
+    desc:"Meta's open-weight foundation model family. Scout (17B MoE) and Maverick variants. Run locally or via cloud.",
+    bestFor:"Self-hosted AI, custom fine-tuning",
+    category:"models",
+    catLabel:"AI Models",
+    catClass:"cat-models",
+    pricing:"free",
+    priceNote:"Free (open weights)",
+    url:"https://ai.meta.com/llama/",
+    badges:["new"],
+    trending:false
+  },
+  {
+    name:"Mistral",
+    icon:"Mi",
+    iconClass:"icon-orange",
+    desc:"French AI lab offering efficient, high-quality open and commercial models. Strong multilingual support.",
+    bestFor:"European AI compliance, efficient inference",
+    category:"models",
+    catLabel:"AI Models",
+    catClass:"cat-models",
+    pricing:"freemium",
+    priceNote:"Free (open) / API pricing",
+    url:"https://mistral.ai",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"DeepSeek",
+    icon:"DS",
+    iconClass:"icon-teal",
+    desc:"Chinese AI lab known for cost-efficient reasoning models. DeepSeek-R1 and V3 compete with top Western models at lower cost.",
+    bestFor:"Cost-conscious API usage, reasoning tasks",
+    category:"models",
+    catLabel:"AI Models",
+    catClass:"cat-models",
+    pricing:"freemium",
+    priceNote:"Free tier / Very low API pricing",
+    url:"https://deepseek.com",
+    badges:["hot"],
+    trending:false
+  },
+
+  // ─── WRITING & CONTENT ───
+  {
+    name:"Jasper",
+    icon:"Ja",
+    iconClass:"icon-red",
+    desc:"Enterprise AI content platform for marketing teams. Brand voice control, campaign workflows, and SEO optimization.",
+    bestFor:"Marketing teams, brand content at scale",
+    category:"writing",
+    catLabel:"Writing",
+    catClass:"cat-writing",
+    pricing:"paid",
+    priceNote:"$49–$125/mo",
+    url:"https://jasper.ai",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Copy.ai",
+    icon:"Co",
+    iconClass:"icon-purple",
+    desc:"AI-powered go-to-market platform. Generates sales copy, email sequences, social content, and blog posts.",
+    bestFor:"Sales & marketing teams",
+    category:"writing",
+    catLabel:"Writing",
+    catClass:"cat-writing",
+    pricing:"freemium",
+    priceNote:"Free / $49/mo",
+    url:"https://copy.ai",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Notion AI",
+    icon:"N",
+    iconClass:"icon-dark",
+    desc:"AI built into Notion workspace. Summarizes, drafts, edits, and translates content within your notes and docs.",
+    bestFor:"Knowledge workers, team documentation",
+    category:"writing",
+    catLabel:"Writing",
+    catClass:"cat-writing",
+    pricing:"paid",
+    priceNote:"$10/user/mo add-on",
+    url:"https://notion.so/product/ai",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Grammarly AI",
+    icon:"Gr",
+    iconClass:"icon-green",
+    desc:"AI writing assistant with grammar, tone, and style suggestions. Now includes generative AI for drafting and rewriting.",
+    bestFor:"Professional writing, email communication",
+    category:"writing",
+    catLabel:"Writing",
+    catClass:"cat-writing",
+    pricing:"freemium",
+    priceNote:"Free / $12–$15/mo",
+    url:"https://grammarly.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Sudowrite",
+    icon:"Sw",
+    iconClass:"icon-rose",
+    desc:"AI writing tool specifically designed for fiction authors. Story engine, brainstorming, prose enhancement.",
+    bestFor:"Fiction writers, novelists",
+    category:"writing",
+    catLabel:"Writing",
+    catClass:"cat-writing",
+    pricing:"paid",
+    priceNote:"$19–$44/mo",
+    url:"https://sudowrite.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Claude (Writing)",
+    icon:"Cl",
+    iconClass:"icon-amber",
+    desc:"Anthropic's Claude excels at long-form writing, nuanced editing, and maintaining consistent voice across documents.",
+    bestFor:"Long-form content, technical writing, editing",
+    category:"writing",
+    catLabel:"Writing",
+    catClass:"cat-writing",
+    pricing:"freemium",
+    priceNote:"Free / $20–$200/mo",
+    url:"https://claude.ai",
+    badges:["hot"],
+    trending:false
+  },
+
+  // ─── IMAGE GENERATION ───
+  {
+    name:"Midjourney",
+    icon:"Mj",
+    iconClass:"icon-blue",
+    desc:"Premier AI image generator known for stunning artistic quality. V7 model with web editor and style customization.",
+    bestFor:"Artistic imagery, concept art, design inspiration",
+    category:"image",
+    catLabel:"Image Gen",
+    catClass:"cat-image",
+    pricing:"paid",
+    priceNote:"$10–$120/mo",
+    url:"https://midjourney.com",
+    badges:["hot"],
+    trending:true,
+    trendRank:8
+  },
+  {
+    name:"DALL-E 3",
+    icon:"DE",
+    iconClass:"icon-green",
+    desc:"OpenAI's image generator integrated into ChatGPT and API. Strong text rendering and prompt adherence.",
+    bestFor:"Quick image generation, text-in-image",
+    category:"image",
+    catLabel:"Image Gen",
+    catClass:"cat-image",
+    pricing:"freemium",
+    priceNote:"Included in ChatGPT Plus / API",
+    url:"https://openai.com/dall-e-3",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Stable Diffusion",
+    icon:"SD",
+    iconClass:"icon-purple",
+    desc:"Open-source image generation model by Stability AI. Run locally, fine-tune, and customize without restrictions.",
+    bestFor:"Local generation, fine-tuning, custom models",
+    category:"image",
+    catLabel:"Image Gen",
+    catClass:"cat-image",
+    pricing:"free",
+    priceNote:"Free (open source) / API available",
+    url:"https://stability.ai",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Ideogram",
+    icon:"Id",
+    iconClass:"icon-rose",
+    desc:"AI image generator with best-in-class text rendering in images. Strong typography and graphic design capabilities.",
+    bestFor:"Logos, posters, text-heavy graphics",
+    category:"image",
+    catLabel:"Image Gen",
+    catClass:"cat-image",
+    pricing:"freemium",
+    priceNote:"Free / $8–$48/mo",
+    url:"https://ideogram.ai",
+    badges:["new"],
+    trending:false
+  },
+  {
+    name:"Flux",
+    icon:"Fx",
+    iconClass:"icon-cyan",
+    desc:"Black Forest Labs' high-quality open image model. Excellent photorealism and prompt following. Various model sizes.",
+    bestFor:"Photorealistic images, open-source workflows",
+    category:"image",
+    catLabel:"Image Gen",
+    catClass:"cat-image",
+    pricing:"free",
+    priceNote:"Free (open) / API via partners",
+    url:"https://blackforestlabs.ai",
+    badges:["hot","new"],
+    trending:false
+  },
+  {
+    name:"Adobe Firefly",
+    icon:"Af",
+    iconClass:"icon-red",
+    desc:"Adobe's commercially safe AI image generator. Trained on licensed content, integrated into Photoshop and Creative Cloud.",
+    bestFor:"Commercial use, Creative Cloud workflows",
+    category:"image",
+    catLabel:"Image Gen",
+    catClass:"cat-image",
+    pricing:"freemium",
+    priceNote:"Free credits / $10/mo / CC included",
+    url:"https://firefly.adobe.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Leonardo AI",
+    icon:"Le",
+    iconClass:"icon-orange",
+    desc:"AI image generation platform with fine-tuning, real-time canvas, and game asset creation tools.",
+    bestFor:"Game devs, digital art, asset creation",
+    category:"image",
+    catLabel:"Image Gen",
+    catClass:"cat-image",
+    pricing:"freemium",
+    priceNote:"Free / $12–$60/mo",
+    url:"https://leonardo.ai",
+    badges:[],
+    trending:false
+  },
+
+  // ─── VIDEO GENERATION ───
+  {
+    name:"Sora",
+    icon:"So",
+    iconClass:"icon-green",
+    desc:"OpenAI's text-to-video and image-to-video model. Generates cinematic, realistic videos up to 60 seconds.",
+    bestFor:"Creative professionals, filmmakers",
+    category:"video",
+    catLabel:"Video Gen",
+    catClass:"cat-video",
+    pricing:"paid",
+    priceNote:"Via ChatGPT Plus / Pro",
+    url:"https://openai.com/sora",
+    badges:["hot"],
+    trending:true,
+    trendRank:7
+  },
+  {
+    name:"Runway ML",
+    icon:"Rw",
+    iconClass:"icon-purple",
+    desc:"Leading AI video platform with Gen-4.5 model. Text/image to video, motion brush, camera control, and editing suite.",
+    bestFor:"Video editors, content creators, filmmakers",
+    category:"video",
+    catLabel:"Video Gen",
+    catClass:"cat-video",
+    pricing:"freemium",
+    priceNote:"Free / $12–$76/mo",
+    url:"https://runwayml.com",
+    badges:["hot"],
+    trending:false
+  },
+  {
+    name:"Kling AI",
+    icon:"Kl",
+    iconClass:"icon-blue",
+    desc:"Kuaishou's video generation model with impressive motion quality and physics. Supports long-form video generation.",
+    bestFor:"High-motion video content",
+    category:"video",
+    catLabel:"Video Gen",
+    catClass:"cat-video",
+    pricing:"freemium",
+    priceNote:"Free tier / Paid plans",
+    url:"https://klingai.com",
+    badges:["new"],
+    trending:false
+  },
+  {
+    name:"Pika",
+    icon:"Pk",
+    iconClass:"icon-orange",
+    desc:"AI video generation with scene editing, lip sync, and special effects. Easy-to-use interface for quick video creation.",
+    bestFor:"Social media videos, quick clips",
+    category:"video",
+    catLabel:"Video Gen",
+    catClass:"cat-video",
+    pricing:"freemium",
+    priceNote:"Free / $8–$58/mo",
+    url:"https://pika.art",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"HeyGen",
+    icon:"HG",
+    iconClass:"icon-teal",
+    desc:"AI video generation with talking avatars. Creates personalized sales videos, training content, and localized videos.",
+    bestFor:"Marketing videos, training content, localization",
+    category:"video",
+    catLabel:"Video Gen",
+    catClass:"cat-video",
+    pricing:"freemium",
+    priceNote:"Free / $24–$69/mo",
+    url:"https://heygen.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Synthesia",
+    icon:"Sy",
+    iconClass:"icon-indigo",
+    desc:"Enterprise AI video platform. Creates presenter-led videos from text using realistic AI avatars in 140+ languages.",
+    bestFor:"Corporate training, internal comms",
+    category:"video",
+    catLabel:"Video Gen",
+    catClass:"cat-video",
+    pricing:"paid",
+    priceNote:"$22–$67/mo",
+    url:"https://synthesia.io",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Luma Dream Machine",
+    icon:"Lu",
+    iconClass:"icon-fuchsia",
+    desc:"AI video generator from Luma AI. Creates fluid, cinematic videos from text and images with strong visual coherence.",
+    bestFor:"Cinematic shorts, creative experimentation",
+    category:"video",
+    catLabel:"Video Gen",
+    catClass:"cat-video",
+    pricing:"freemium",
+    priceNote:"Free / $24–$96/mo",
+    url:"https://lumalabs.ai/dream-machine",
+    badges:[],
+    trending:false
+  },
+
+  // ─── VOICE & AUDIO ───
+  {
+    name:"ElevenLabs",
+    icon:"11",
+    iconClass:"icon-blue",
+    desc:"Industry-leading AI voice synthesis. Ultra-realistic TTS, voice cloning, dubbing, sound effects, and conversational AI agents.",
+    bestFor:"Voice cloning, audiobooks, content localization",
+    category:"voice",
+    catLabel:"Voice & Audio",
+    catClass:"cat-voice",
+    pricing:"freemium",
+    priceNote:"Free / $5–$99/mo",
+    url:"https://elevenlabs.io",
+    badges:["hot"],
+    trending:true,
+    trendRank:9
+  },
+  {
+    name:"Murf AI",
+    icon:"Mu",
+    iconClass:"icon-green",
+    desc:"AI voice generator for voiceovers. 200+ natural voices, voice cloning, and sync with video/presentations.",
+    bestFor:"Voiceovers for video, presentations, ads",
+    category:"voice",
+    catLabel:"Voice & Audio",
+    catClass:"cat-voice",
+    pricing:"freemium",
+    priceNote:"Free / $23–$83/mo",
+    url:"https://murf.ai",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Descript",
+    icon:"De",
+    iconClass:"icon-purple",
+    desc:"AI-powered audio/video editor. Edit audio by editing text, remove filler words, clone your voice, and overdub.",
+    bestFor:"Podcasters, video editors, content creators",
+    category:"voice",
+    catLabel:"Voice & Audio",
+    catClass:"cat-voice",
+    pricing:"freemium",
+    priceNote:"Free / $24–$40/mo",
+    url:"https://descript.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Adobe Podcast",
+    icon:"AP",
+    iconClass:"icon-red",
+    desc:"AI-powered audio tools from Adobe. Enhance Speech removes background noise and improves audio quality instantly.",
+    bestFor:"Cleaning up audio, podcast production",
+    category:"voice",
+    catLabel:"Voice & Audio",
+    catClass:"cat-voice",
+    pricing:"free",
+    priceNote:"Free (web tool)",
+    url:"https://podcast.adobe.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"OpenAI Whisper",
+    icon:"Wh",
+    iconClass:"icon-dark",
+    desc:"Open-source speech recognition model by OpenAI. State-of-the-art transcription supporting 99+ languages.",
+    bestFor:"Transcription, subtitle generation",
+    category:"voice",
+    catLabel:"Voice & Audio",
+    catClass:"cat-voice",
+    pricing:"free",
+    priceNote:"Free (open source) / API",
+    url:"https://openai.com/research/whisper",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Play.ht",
+    icon:"Ph",
+    iconClass:"icon-orange",
+    desc:"AI text-to-speech platform with ultra-realistic voices, emotion control, and API access for apps.",
+    bestFor:"App integration, IVR systems, content",
+    category:"voice",
+    catLabel:"Voice & Audio",
+    catClass:"cat-voice",
+    pricing:"freemium",
+    priceNote:"Free / $31–$99/mo",
+    url:"https://play.ht",
+    badges:[],
+    trending:false
+  },
+
+  // ─── DATA & ANALYTICS ───
+  {
+    name:"Julius AI",
+    icon:"Ju",
+    iconClass:"icon-blue",
+    desc:"AI data analyst. Upload CSVs, spreadsheets, or databases and ask questions in plain English. Generates charts and insights.",
+    bestFor:"Business analysts, data exploration",
+    category:"data",
+    catLabel:"Data & Analytics",
+    catClass:"cat-data",
+    pricing:"freemium",
+    priceNote:"Free / $20–$50/mo",
+    url:"https://julius.ai",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"ChatCSV",
+    icon:"Cv",
+    iconClass:"icon-green",
+    desc:"Chat with your CSV files. Upload data and ask questions to get instant analysis, visualizations, and summaries.",
+    bestFor:"Quick CSV analysis without coding",
+    category:"data",
+    catLabel:"Data & Analytics",
+    catClass:"cat-data",
+    pricing:"freemium",
+    priceNote:"Free / $20/mo",
+    url:"https://www.chatcsv.co",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Polymer",
+    icon:"Po",
+    iconClass:"icon-purple",
+    desc:"AI-powered business intelligence. Turns spreadsheets into interactive dashboards and auto-generates insights.",
+    bestFor:"Non-technical teams, auto-dashboards",
+    category:"data",
+    catLabel:"Data & Analytics",
+    catClass:"cat-data",
+    pricing:"freemium",
+    priceNote:"Free / $20–$500/mo",
+    url:"https://polymersearch.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Obviously AI",
+    icon:"OA",
+    iconClass:"icon-teal",
+    desc:"No-code ML platform. Build predictive models from your data in minutes without writing code.",
+    bestFor:"Predictions without data science team",
+    category:"data",
+    catLabel:"Data & Analytics",
+    catClass:"cat-data",
+    pricing:"paid",
+    priceNote:"$75–$500/mo",
+    url:"https://obviously.ai",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"DataRobot",
+    icon:"DR",
+    iconClass:"icon-indigo",
+    desc:"Enterprise AI platform for building, deploying, and monitoring ML models at scale. AutoML and MLOps combined.",
+    bestFor:"Enterprise ML operations, regulated industries",
+    category:"data",
+    catLabel:"Data & Analytics",
+    catClass:"cat-data",
+    pricing:"enterprise",
+    priceNote:"Enterprise (custom)",
+    url:"https://datarobot.com",
+    badges:[],
+    trending:false
+  },
+
+  // ─── AUTOMATION & AGENTS ───
+  {
+    name:"n8n",
+    icon:"n8",
+    iconClass:"icon-orange",
+    desc:"Open-source workflow automation with AI agent capabilities. 400+ integrations, self-hostable, code-when-needed.",
+    bestFor:"Technical teams, self-hosted automation",
+    category:"automation",
+    catLabel:"Automation & Agents",
+    catClass:"cat-automation",
+    pricing:"freemium",
+    priceNote:"Free (self-hosted) / €24/mo cloud",
+    url:"https://n8n.io",
+    badges:["hot"],
+    trending:false
+  },
+  {
+    name:"Make (Integromat)",
+    icon:"Mk",
+    iconClass:"icon-purple",
+    desc:"Visual automation platform connecting 1,800+ apps. Drag-and-drop scenario builder with AI-enhanced workflows.",
+    bestFor:"Complex multi-app automations",
+    category:"automation",
+    catLabel:"Automation & Agents",
+    catClass:"cat-automation",
+    pricing:"freemium",
+    priceNote:"Free / $9–$16/mo",
+    url:"https://make.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Zapier AI",
+    icon:"Zp",
+    iconClass:"icon-orange",
+    desc:"AI-powered automation platform. Natural language workflow creation, AI actions in Zaps, and AI chatbot builder.",
+    bestFor:"Non-technical users, SaaS integration",
+    category:"automation",
+    catLabel:"Automation & Agents",
+    catClass:"cat-automation",
+    pricing:"freemium",
+    priceNote:"Free / $20–$69/mo",
+    url:"https://zapier.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"AutoGPT",
+    icon:"AG",
+    iconClass:"icon-dark",
+    desc:"Open-source autonomous AI agent framework. Chains LLM calls to accomplish complex multi-step tasks independently.",
+    bestFor:"Research, autonomous task execution",
+    category:"automation",
+    catLabel:"Automation & Agents",
+    catClass:"cat-automation",
+    pricing:"free",
+    priceNote:"Free (open source)",
+    url:"https://github.com/Significant-Gravitas/AutoGPT",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"CrewAI",
+    icon:"CA",
+    iconClass:"icon-blue",
+    desc:"Framework for orchestrating multi-agent AI systems. Define agent roles, goals, and collaboration patterns.",
+    bestFor:"Multi-agent orchestration, complex workflows",
+    category:"automation",
+    catLabel:"Automation & Agents",
+    catClass:"cat-automation",
+    pricing:"freemium",
+    priceNote:"Free (open source) / Cloud plans",
+    url:"https://crewai.com",
+    badges:["hot"],
+    trending:false
+  },
+  {
+    name:"LangChain",
+    icon:"LC",
+    iconClass:"icon-green",
+    desc:"Leading framework for building LLM-powered applications. Chains, agents, RAG, memory, and tool integration.",
+    bestFor:"Developers building custom AI apps",
+    category:"automation",
+    catLabel:"Automation & Agents",
+    catClass:"cat-automation",
+    pricing:"free",
+    priceNote:"Free (open source) / LangSmith paid",
+    url:"https://langchain.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"OpenClaw",
+    icon:"🦀",
+    iconClass:"icon-rose",
+    desc:"AI assistant platform with sub-agents, skill system, browser control, and multi-channel support (Telegram, web, etc).",
+    bestFor:"Personal AI infrastructure, agent orchestration",
+    category:"automation",
+    catLabel:"Automation & Agents",
+    catClass:"cat-automation",
+    pricing:"freemium",
+    priceNote:"Free (open source) / Pro plans",
+    url:"https://openclaw.com",
+    badges:["hot","new"],
+    trending:true,
+    trendRank:10
+  },
+
+  // ─── SEARCH & RESEARCH ───
+  {
+    name:"Perplexity AI",
+    icon:"Px",
+    iconClass:"icon-blue",
+    desc:"AI-powered answer engine with real-time web search, citations, and follow-up questions. The Google alternative.",
+    bestFor:"Research, fact-checking, cited answers",
+    category:"search",
+    catLabel:"Search & Research",
+    catClass:"cat-search",
+    pricing:"freemium",
+    priceNote:"Free / $20/mo Pro",
+    url:"https://perplexity.ai",
+    badges:["hot"],
+    trending:false
+  },
+  {
+    name:"You.com",
+    icon:"Yu",
+    iconClass:"icon-purple",
+    desc:"AI search engine with multiple AI agents for different tasks — research, coding, writing, and image creation.",
+    bestFor:"Multi-modal AI search, privacy-focused",
+    category:"search",
+    catLabel:"Search & Research",
+    catClass:"cat-search",
+    pricing:"freemium",
+    priceNote:"Free / $15/mo",
+    url:"https://you.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Phind",
+    icon:"Ph",
+    iconClass:"icon-dark",
+    desc:"AI search engine optimized for developers. Searches code, docs, and technical content with intelligent answers.",
+    bestFor:"Developer search, technical research",
+    category:"search",
+    catLabel:"Search & Research",
+    catClass:"cat-search",
+    pricing:"freemium",
+    priceNote:"Free / $20/mo",
+    url:"https://phind.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Elicit",
+    icon:"El",
+    iconClass:"icon-green",
+    desc:"AI research assistant that finds, summarizes, and extracts data from academic papers using language models.",
+    bestFor:"Academic research, literature review",
+    category:"search",
+    catLabel:"Search & Research",
+    catClass:"cat-search",
+    pricing:"freemium",
+    priceNote:"Free / $12/mo Plus",
+    url:"https://elicit.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Consensus",
+    icon:"Cs",
+    iconClass:"icon-teal",
+    desc:"AI-powered academic search engine. Finds and synthesizes results from 200M+ scientific papers with evidence ratings.",
+    bestFor:"Evidence-based research, scientific claims",
+    category:"search",
+    catLabel:"Search & Research",
+    catClass:"cat-search",
+    pricing:"freemium",
+    priceNote:"Free / $12/mo Premium",
+    url:"https://consensus.app",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"OpenAI Deep Research",
+    icon:"DR",
+    iconClass:"icon-green",
+    desc:"OpenAI's autonomous research agent. Browses the web for hours, synthesizes comprehensive reports with citations.",
+    bestFor:"In-depth research, competitive analysis",
+    category:"search",
+    catLabel:"Search & Research",
+    catClass:"cat-search",
+    pricing:"paid",
+    priceNote:"Via ChatGPT Pro ($200/mo)",
+    url:"https://openai.com/index/introducing-deep-research/",
+    badges:["new"],
+    trending:false
+  },
+
+  // ─── PRODUCTIVITY & ASSISTANTS ───
+  {
+    name:"Microsoft Copilot",
+    icon:"MS",
+    iconClass:"icon-blue",
+    desc:"AI assistant integrated across Microsoft 365 — Word, Excel, PowerPoint, Outlook, Teams. Enterprise-grade with Graph context.",
+    bestFor:"Microsoft 365 power users, enterprise",
+    category:"productivity",
+    catLabel:"Productivity",
+    catClass:"cat-productivity",
+    pricing:"freemium",
+    priceNote:"Free / $30/user/mo (M365 Copilot)",
+    url:"https://copilot.microsoft.com",
+    badges:["hot"],
+    trending:false
+  },
+  {
+    name:"Google Gemini",
+    icon:"Gm",
+    iconClass:"icon-blue",
+    desc:"Google's AI assistant across Workspace (Docs, Sheets, Gmail, Meet). Deep integration with Google ecosystem.",
+    bestFor:"Google Workspace users, search integration",
+    category:"productivity",
+    catLabel:"Productivity",
+    catClass:"cat-productivity",
+    pricing:"freemium",
+    priceNote:"Free / $20/mo AI Premium",
+    url:"https://gemini.google.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Apple Intelligence",
+    icon:"🍎",
+    iconClass:"icon-dark",
+    desc:"Apple's on-device AI suite. Writing tools, image generation, notification summaries, Siri upgrades, and Visual Intelligence.",
+    bestFor:"Apple ecosystem users",
+    category:"productivity",
+    catLabel:"Productivity",
+    catClass:"cat-productivity",
+    pricing:"free",
+    priceNote:"Free (built into Apple devices)",
+    url:"https://apple.com/apple-intelligence/",
+    badges:["new"],
+    trending:false
+  },
+  {
+    name:"ChatGPT",
+    icon:"GP",
+    iconClass:"icon-green",
+    desc:"OpenAI's conversational AI. GPT-5 powered with browsing, code execution, image generation, voice, and custom GPTs.",
+    bestFor:"General-purpose AI assistant",
+    category:"productivity",
+    catLabel:"Productivity",
+    catClass:"cat-productivity",
+    pricing:"freemium",
+    priceNote:"Free / $20–$200/mo",
+    url:"https://chatgpt.com",
+    badges:["hot"],
+    trending:false
+  },
+  {
+    name:"Notion AI (Productivity)",
+    icon:"N",
+    iconClass:"icon-dark",
+    desc:"AI integrated into Notion for project management, knowledge bases, and team collaboration with Q&A across workspace.",
+    bestFor:"Team productivity, project management",
+    category:"productivity",
+    catLabel:"Productivity",
+    catClass:"cat-productivity",
+    pricing:"paid",
+    priceNote:"$10/user/mo add-on",
+    url:"https://notion.so/product/ai",
+    badges:[],
+    trending:false
+  },
+
+  // ─── SPECIALIZED / NICHE ───
+  {
+    name:"Nano Banana (Gemini Flash Image)",
+    icon:"🍌",
+    iconClass:"icon-yellow",
+    desc:"Google's Gemini 2.5 Flash image generation/editing model (codename 'Nano Banana'). Native multimodal with fast image gen, editing, and enhanced text rendering.",
+    bestFor:"Fast AI image generation & editing via API",
+    category:"specialized",
+    catLabel:"Specialized",
+    catClass:"cat-specialized",
+    pricing:"freemium",
+    priceNote:"Free tier / Pay-per-use API",
+    url:"https://cloud.google.com/blog/products/ai-machine-learning/ultimate-prompting-guide-for-nano-banana",
+    badges:["hot","new"],
+    trending:false
+  },
+  {
+    name:"Banana.dev",
+    icon:"🍌",
+    iconClass:"icon-yellow",
+    desc:"Serverless GPU inference platform for ML models. Deploy models to production with autoscaling, pay only for compute used.",
+    bestFor:"ML model deployment, serverless inference",
+    category:"specialized",
+    catLabel:"Specialized",
+    catClass:"cat-specialized",
+    pricing:"paid",
+    priceNote:"Pay-per-use GPU pricing",
+    url:"https://banana.dev",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Replicate",
+    icon:"Re",
+    iconClass:"icon-blue",
+    desc:"Run open-source ML models in the cloud via API. Thousands of community models with simple deployment and scaling.",
+    bestFor:"Running open-source models via API",
+    category:"specialized",
+    catLabel:"Specialized",
+    catClass:"cat-specialized",
+    pricing:"freemium",
+    priceNote:"Free tier / Pay-per-use",
+    url:"https://replicate.com",
+    badges:[],
+    trending:false
+  },
+  {
+    name:"Hugging Face",
+    icon:"🤗",
+    iconClass:"icon-amber",
+    desc:"The GitHub of machine learning. Model hub, datasets, Spaces for demos, and Inference API. The open ML community home.",
+    bestFor:"ML community, model discovery, open-source AI",
+    category:"specialized",
+    catLabel:"Specialized",
+    catClass:"cat-specialized",
+    pricing:"freemium",
+    priceNote:"Free / $9/mo Pro / Enterprise",
+    url:"https://huggingface.co",
+    badges:["hot"],
+    trending:false
+  },
+  {
+    name:"Modal",
+    icon:"Md",
+    iconClass:"icon-green",
+    desc:"Cloud platform for running generative AI, batch jobs, and data pipelines. Serverless GPU/CPU with Python-native SDK.",
+    bestFor:"ML engineers, batch processing, fine-tuning",
+    category:"specialized",
+    catLabel:"Specialized",
+    catClass:"cat-specialized",
+    pricing:"freemium",
+    priceNote:"Free tier / Pay-per-use",
+    url:"https://modal.com",
+    badges:[],
+    trending:false
+  }
+];
+
+// ============================================================
+// CATEGORY META
+// ============================================================
+const categoryOrder = [
+  "coding","builders","models","writing","image","video",
+  "voice","data","automation","search","productivity","specialized"
+];
+const categoryLabels = {
+  coding:"Coding & Development",
+  builders:"App/UI Builders",
+  models:"AI Models / Foundations",
+  writing:"Writing & Content",
+  image:"Image Generation",
+  video:"Video Generation",
+  voice:"Voice & Audio",
+  data:"Data & Analytics",
+  automation:"Automation & Agents",
+  search:"Search & Research",
+  productivity:"Productivity & Assistants",
+  specialized:"Specialized / Niche"
+};
+const categoryIcons = {
+  coding:"💻",builders:"🏗️",models:"🧠",writing:"✍️",
+  image:"🎨",video:"🎬",voice:"🎙️",data:"📊",
+  automation:"⚙️",search:"🔍",productivity:"📋",specialized:"🔬"
+};
+
+// ============================================================
+// PRICING ORDER (for sorting)
+// ============================================================
+const pricingOrder = {free:0,freemium:1,paid:2,enterprise:3};
+
+// ============================================================
+// RENDER FUNCTIONS
+// ============================================================
+function createCardHTML(tool, isTrending) {
+  const badges = tool.badges.map(b => {
+    if(b==="hot") return '<span class="badge badge-hot">🔥 Hot</span>';
+    if(b==="new") return '<span class="badge badge-new">✨ New</span>';
+    if(b==="trending") return '<span class="badge badge-trending">📈 Trending</span>';
+    return '';
+  }).join('');
+
+  const pricingClass = 'price-' + tool.pricing;
+
+  return `
+    <div class="tool-card ${isTrending?'trending-card':''}" 
+         data-category="${tool.category}" 
+         data-pricing="${tool.pricing}" 
+         data-name="${tool.name.toLowerCase()}"
+         data-bestfor="${tool.bestFor.toLowerCase()}"
+         data-search="${(tool.name+' '+tool.desc+' '+tool.bestFor+' '+tool.catLabel+' '+tool.pricing).toLowerCase()}">
+      <div class="card-top">
+        <div class="tool-icon ${tool.iconClass}">${tool.icon}</div>
+        <div class="card-header">
+          <div class="tool-name">
+            <a href="${tool.url}" target="_blank" rel="noopener">${tool.name}</a>
+            ${badges}
+          </div>
+          <div class="tool-desc">${tool.desc}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class="cat-badge ${tool.catClass}">${tool.catLabel}</span>
+        <span class="price-tag ${pricingClass}">${tool.priceNote}</span>
+      </div>
+      <div class="card-footer">
+        <span class="best-for">Best for: ${tool.bestFor}</span>
+        <a href="${tool.url}" target="_blank" rel="noopener" class="card-link">Visit →</a>
+      </div>
+    </div>
+  `;
+}
+
+function renderTrending() {
+  const trending = tools.filter(t => t.trending).sort((a,b) => a.trendRank - b.trendRank);
+  const grid = document.getElementById('trendingGrid');
+  grid.innerHTML = trending.map(t => createCardHTML(t, true)).join('');
+}
+
+function renderAllSections() {
+  const container = document.getElementById('allToolsSections');
+  let html = '';
+  for(const cat of categoryOrder) {
+    const catTools = tools.filter(t => t.category === cat);
+    html += `
+      <section class="category-section" data-section-cat="${cat}">
+        <div class="section-header">
+          <h2>${categoryIcons[cat]} ${categoryLabels[cat]}</h2>
+          <span class="section-count">${catTools.length} tools</span>
+        </div>
+        <div class="card-grid">
+          ${catTools.map(t => createCardHTML(t, false)).join('')}
+        </div>
+      </section>
+    `;
+  }
+  container.innerHTML = html;
+}
+
+// ============================================================
+// FILTER & SEARCH
+// ============================================================
+let currentCategory = 'all';
+let currentSearch = '';
+let currentSort = 'default';
+
+function applyFilters() {
+  const cards = document.querySelectorAll('#allToolsSections .tool-card');
+  const sections = document.querySelectorAll('.category-section');
+  const trendingSection = document.getElementById('trendingSection');
+  let visibleCount = 0;
+
+  // Show/hide trending section
+  if(currentCategory === 'all' && !currentSearch) {
+    trendingSection.style.display = '';
+  } else if(currentCategory === 'trending') {
+    trendingSection.style.display = '';
+    const trendCards = trendingSection.querySelectorAll('.tool-card');
+    trendCards.forEach(card => {
+      const match = !currentSearch || card.dataset.search.includes(currentSearch.toLowerCase());
+      card.classList.toggle('hidden', !match);
+      if(match) visibleCount++;
+    });
+    sections.forEach(s => s.style.display = 'none');
+    document.getElementById('noResults').classList.toggle('visible', visibleCount === 0);
+    document.getElementById('resultCount').textContent = `Showing ${visibleCount} tools`;
+    return;
+  } else {
+    trendingSection.style.display = 'none';
+  }
+
+  cards.forEach(card => {
+    const catMatch = currentCategory === 'all' || card.dataset.category === currentCategory;
+    const searchMatch = !currentSearch || card.dataset.search.includes(currentSearch.toLowerCase());
+    const visible = catMatch && searchMatch;
+    card.classList.toggle('hidden', !visible);
+    if(visible) visibleCount++;
+  });
+
+  sections.forEach(section => {
+    const cat = section.dataset.sectionCat;
+    if(currentCategory !== 'all' && currentCategory !== cat) {
+      section.style.display = 'none';
+    } else {
+      const hasVisible = section.querySelectorAll('.tool-card:not(.hidden)').length > 0;
+      section.style.display = hasVisible ? '' : 'none';
+    }
+  });
+
+  if(trendingSection.style.display !== 'none') {
+    const trendCards = trendingSection.querySelectorAll('.tool-card');
+    trendCards.forEach(card => card.classList.remove('hidden'));
+  }
+
+  document.getElementById('noResults').classList.toggle('visible', visibleCount === 0);
+  document.getElementById('resultCount').textContent = `Showing ${visibleCount} tools`;
+}
+
+function applySorting() {
+  const container = document.getElementById('allToolsSections');
+  const sections = Array.from(container.querySelectorAll('.category-section'));
+
+  if(currentSort === 'category' || currentSort === 'default') {
+    // Sort sections by category order
+    sections.sort((a,b) => categoryOrder.indexOf(a.dataset.sectionCat) - categoryOrder.indexOf(b.dataset.sectionCat));
+    sections.forEach(s => container.appendChild(s));
+    // Within each section, sort cards by default order
+    sections.forEach(section => {
+      const grid = section.querySelector('.card-grid');
+      const cards = Array.from(grid.children);
+      if(currentSort === 'default') {
+        // already in insertion order
+      }
+      cards.forEach(c => grid.appendChild(c));
+    });
+  } else if(currentSort === 'name' || currentSort === 'name-desc') {
+    sections.forEach(section => {
+      const grid = section.querySelector('.card-grid');
+      const cards = Array.from(grid.children);
+      cards.sort((a,b) => {
+        const cmp = a.dataset.name.localeCompare(b.dataset.name);
+        return currentSort === 'name-desc' ? -cmp : cmp;
+      });
+      cards.forEach(c => grid.appendChild(c));
+    });
+  } else if(currentSort === 'price-asc' || currentSort === 'price-desc') {
+    sections.forEach(section => {
+      const grid = section.querySelector('.card-grid');
+      const cards = Array.from(grid.children);
+      cards.sort((a,b) => {
+        const pa = pricingOrder[a.dataset.pricing] || 0;
+        const pb = pricingOrder[b.dataset.pricing] || 0;
+        return currentSort === 'price-desc' ? pb - pa : pa - pb;
+      });
+      cards.forEach(c => grid.appendChild(c));
+    });
+  } else if(currentSort === 'use-case') {
+    sections.forEach(section => {
+      const grid = section.querySelector('.card-grid');
+      const cards = Array.from(grid.children);
+      cards.sort((a,b) => a.dataset.bestfor.localeCompare(b.dataset.bestfor));
+      cards.forEach(c => grid.appendChild(c));
+    });
+  }
+}
+
+// ============================================================
+// EVENT LISTENERS
+// ============================================================
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  currentSearch = e.target.value.trim();
+  applyFilters();
+});
+
+document.getElementById('catTabs').addEventListener('click', function(e) {
+  const tab = e.target.closest('.cat-tab');
+  if(!tab) return;
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  currentCategory = tab.dataset.cat;
+  applyFilters();
+});
+
+document.getElementById('sortSelect').addEventListener('change', function(e) {
+  currentSort = e.target.value;
+  applySorting();
+  applyFilters();
+});
+
+// Keyboard shortcut: focus search on /
+document.addEventListener('keydown', function(e) {
+  if(e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+});
+
+// ============================================================
+// INIT
+// ============================================================
+renderTrending();
+renderAllSections();
+applyFilters();
+</script>
+
+</body>
+</html>
