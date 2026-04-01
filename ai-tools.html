@@ -104,6 +104,8 @@ main{max-width:1400px;margin:0 auto;padding:24px}
 .badge-hot{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.2)}
 .badge-new{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.2)}
 .badge-trending{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.badge-discontinued{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+.badge-warning{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
 
 .cat-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;letter-spacing:.2px;margin-top:8px}
 
@@ -303,14 +305,14 @@ const tools = [
     priceNote:"Free / $10–$39/mo",
     url:"https://github.com/features/copilot",
     badges:["hot"],
-    trending:true,
-    trendRank:3
+    trending:false,
+    trendRank:null
   },
   {
     name:"Windsurf",
     icon:"Ws",
     iconClass:"icon-cyan",
-    desc:"AI-powered IDE (formerly Codeium) with Cascade agent for autonomous multi-file editing and deep codebase understanding.",
+    desc:"AI-powered IDE with Cascade agent and SWE-1.5 model for autonomous multi-file editing and deep codebase understanding. 1M+ users, 4,000+ enterprise customers.",
     bestFor:"Autonomous code generation & refactoring",
     category:"coding",
     catLabel:"Coding & Dev",
@@ -319,7 +321,8 @@ const tools = [
     priceNote:"Free / $15/mo",
     url:"https://windsurf.com",
     badges:["hot"],
-    trending:false
+    trending:true,
+    trendRank:6
   },
   {
     name:"Claude Code",
@@ -335,7 +338,7 @@ const tools = [
     url:"https://docs.anthropic.com/en/docs/claude-code",
     badges:["hot","new"],
     trending:true,
-    trendRank:2
+    trendRank:4
   },
   {
     name:"OpenAI Codex",
@@ -349,9 +352,9 @@ const tools = [
     pricing:"paid",
     priceNote:"Via ChatGPT Pro/API",
     url:"https://openai.com/index/introducing-codex/",
-    badges:["new"],
+    badges:["hot"],
     trending:true,
-    trendRank:6
+    trendRank:8
   },
   {
     name:"Bolt.new",
@@ -366,7 +369,8 @@ const tools = [
     priceNote:"Free / $20–$200/mo",
     url:"https://bolt.new",
     badges:["hot"],
-    trending:false
+    trending:true,
+    trendRank:10
   },
   {
     name:"Lovable",
@@ -381,7 +385,8 @@ const tools = [
     priceNote:"Free / $20–$100/mo",
     url:"https://lovable.dev",
     badges:["hot"],
-    trending:false
+    trending:true,
+    trendRank:7
   },
   {
     name:"Replit Agent",
@@ -402,14 +407,14 @@ const tools = [
     name:"v0 by Vercel",
     icon:"v0",
     iconClass:"icon-dark",
-    desc:"AI-powered UI generator that creates React/Next.js components from text prompts using shadcn/ui.",
-    bestFor:"Frontend devs, rapid UI prototyping",
+    desc:"AI app builder by Vercel. Builds full-stack apps, agents, and websites from prompts. Deploys directly to Vercel. Full design mode and GitHub sync.",
+    bestFor:"Frontend devs, rapid prototyping, full-stack app generation",
     category:"coding",
     catLabel:"Coding & Dev",
     catClass:"cat-coding",
     pricing:"freemium",
-    priceNote:"Free / $20/mo",
-    url:"https://v0.dev",
+    priceNote:"Free / $30/user/mo Team / $100 Business",
+    url:"https://v0.app",
     badges:[],
     trending:false
   },
@@ -455,7 +460,7 @@ const tools = [
     catLabel:"App/UI Builders",
     catClass:"cat-builders",
     pricing:"freemium",
-    priceNote:"Free / $5–$30/mo",
+    priceNote:"Free design / $10–$100/mo (published sites)",
     url:"https://framer.com",
     badges:[],
     trending:false
@@ -481,7 +486,7 @@ const tools = [
     name:"GPT-5",
     icon:"G5",
     iconClass:"icon-green",
-    desc:"OpenAI's latest frontier model. Massive reasoning improvements, native tool use, extended context, multimodal.",
+    desc:"OpenAI's latest frontier model. Massive reasoning improvements, native tool use, extended context, multimodal. API model name: gpt-5.4 with mini/nano variants.",
     bestFor:"General-purpose AI, complex reasoning tasks",
     category:"models",
     catLabel:"AI Models",
@@ -491,7 +496,7 @@ const tools = [
     url:"https://openai.com",
     badges:["hot","new"],
     trending:true,
-    trendRank:4
+    trendRank:3
   },
   {
     name:"Claude 4 (Opus & Sonnet)",
@@ -503,26 +508,27 @@ const tools = [
     catLabel:"AI Models",
     catClass:"cat-models",
     pricing:"freemium",
-    priceNote:"Free tier / $20–$200/mo / API",
+    priceNote:"Free / $20/mo Pro / $100+/mo Max",
     url:"https://anthropic.com",
     badges:["hot","new"],
-    trending:true,
-    trendRank:5
+    trending:false,
+    trendRank:null
   },
   {
-    name:"Gemini 2.5 Pro",
+    name:"Gemini 3.1 Pro",
     icon:"Gm",
     iconClass:"icon-blue",
-    desc:"Google's top-tier model with massive 1M+ token context, native multimodal, and built-in Google Search grounding.",
+    desc:"Google's flagship Gemini 3 family model with massive 1M+ token context, native multimodal, and built-in Google Search grounding. 3.1 Pro for complex tasks, 3 Flash for speed.",
     bestFor:"Long-document analysis, multimodal reasoning",
     category:"models",
     catLabel:"AI Models",
     catClass:"cat-models",
     pricing:"freemium",
-    priceNote:"Free / $20/mo Google One AI Premium",
-    url:"https://deepmind.google/technologies/gemini/",
+    priceNote:"Free / Google AI Pro $20/mo / AI Ultra (custom)",
+    url:"https://deepmind.google/models/gemini/",
     badges:["hot"],
-    trending:false
+    trending:true,
+    trendRank:2
   },
   {
     name:"Grok 3",
@@ -551,8 +557,9 @@ const tools = [
     pricing:"free",
     priceNote:"Free (open weights)",
     url:"https://ai.meta.com/llama/",
-    badges:["new"],
-    trending:false
+    badges:["new","hot"],
+    trending:true,
+    trendRank:5
   },
   {
     name:"Mistral",
@@ -605,13 +612,13 @@ const tools = [
     name:"Copy.ai",
     icon:"Co",
     iconClass:"icon-purple",
-    desc:"AI-powered go-to-market platform. Generates sales copy, email sequences, social content, and blog posts.",
-    bestFor:"Sales & marketing teams",
+    desc:"AI-powered go-to-market platform for enterprise teams. Generates sales copy, email sequences, and blog content at scale. Now enterprise-only (from $1,000/mo).",
+    bestFor:"Enterprise marketing & sales teams",
     category:"writing",
     catLabel:"Writing",
     catClass:"cat-writing",
-    pricing:"freemium",
-    priceNote:"Free / $49/mo",
+    pricing:"enterprise",
+    priceNote:"$1,000–$3,000/mo (team/enterprise only)",
     url:"https://copy.ai",
     badges:[],
     trending:false
@@ -641,7 +648,7 @@ const tools = [
     catLabel:"Writing",
     catClass:"cat-writing",
     pricing:"freemium",
-    priceNote:"Free / $12–$15/mo",
+    priceNote:"Free / $12/mo Pro",
     url:"https://grammarly.com",
     badges:[],
     trending:false
@@ -656,7 +663,7 @@ const tools = [
     catLabel:"Writing",
     catClass:"cat-writing",
     pricing:"paid",
-    priceNote:"$19–$44/mo",
+    priceNote:"$10–$44/mo",
     url:"https://sudowrite.com",
     badges:[],
     trending:false
@@ -691,8 +698,8 @@ const tools = [
     priceNote:"$10–$120/mo",
     url:"https://midjourney.com",
     badges:["hot"],
-    trending:true,
-    trendRank:8
+    trending:false,
+    trendRank:null
   },
   {
     name:"DALL-E 3",
@@ -750,7 +757,7 @@ const tools = [
     catClass:"cat-image",
     pricing:"free",
     priceNote:"Free (open) / API via partners",
-    url:"https://blackforestlabs.ai",
+    url:"https://bfl.ai",
     badges:["hot","new"],
     trending:false
   },
@@ -857,7 +864,7 @@ const tools = [
     catLabel:"Video Gen",
     catClass:"cat-video",
     pricing:"freemium",
-    priceNote:"Free / $24–$69/mo",
+    priceNote:"Free / $29–$99/mo",
     url:"https://heygen.com",
     badges:[],
     trending:false
@@ -904,7 +911,7 @@ const tools = [
     catLabel:"Voice & Audio",
     catClass:"cat-voice",
     pricing:"freemium",
-    priceNote:"Free / $5–$99/mo",
+    priceNote:"Free / $5–$330/mo (business: $1,320/mo)",
     url:"https://elevenlabs.io",
     badges:["hot"],
     trending:true,
@@ -934,8 +941,8 @@ const tools = [
     category:"voice",
     catLabel:"Voice & Audio",
     catClass:"cat-voice",
-    pricing:"freemium",
-    priceNote:"Free / $24–$40/mo",
+    pricing:"paid",
+    priceNote:"$16–$50/mo (annual) / $24–$65/mo (monthly)",
     url:"https://descript.com",
     badges:[],
     trending:false
@@ -974,7 +981,7 @@ const tools = [
     name:"Play.ht",
     icon:"Ph",
     iconClass:"icon-orange",
-    desc:"AI text-to-speech platform with ultra-realistic voices, emotion control, and API access for apps.",
+    desc:"AI text-to-speech platform with ultra-realistic voices, emotion control, and API access for apps. <strong>⚠️ Status unconfirmed — site unreachable as of April 2026.</strong> Verify before recommending.",
     bestFor:"App integration, IVR systems, content",
     category:"voice",
     catLabel:"Voice & Audio",
@@ -982,7 +989,7 @@ const tools = [
     pricing:"freemium",
     priceNote:"Free / $31–$99/mo",
     url:"https://play.ht",
-    badges:[],
+    badges:["warning"],
     trending:false
   },
 
@@ -1021,29 +1028,29 @@ const tools = [
     name:"Polymer",
     icon:"Po",
     iconClass:"icon-purple",
-    desc:"AI-powered business intelligence. Turns spreadsheets into interactive dashboards and auto-generates insights.",
-    bestFor:"Non-technical teams, auto-dashboards",
+    desc:"AI-driven embedded analytics API for product developers. Add charts and dashboards to your app with minimal code.",
+    bestFor:"Product developers adding analytics to SaaS apps",
     category:"data",
     catLabel:"Data & Analytics",
     catClass:"cat-data",
-    pricing:"freemium",
-    priceNote:"Free / $20–$500/mo",
+    pricing:"enterprise",
+    priceNote:"Enterprise ($500/mo+ API)",
     url:"https://polymersearch.com",
     badges:[],
     trending:false
   },
   {
-    name:"Obviously AI",
+    name:"Zams (formerly Obviously AI)",
     icon:"OA",
     iconClass:"icon-teal",
-    desc:"No-code ML platform. Build predictive models from your data in minutes without writing code.",
-    bestFor:"Predictions without data science team",
+    desc:"AI workers for revenue teams. Pivoted from no-code ML to AI sales automation agents.",
+    bestFor:"Revenue teams, AI sales automation",
     category:"data",
     catLabel:"Data & Analytics",
     catClass:"cat-data",
-    pricing:"paid",
-    priceNote:"$75–$500/mo",
-    url:"https://obviously.ai",
+    pricing:"enterprise",
+    priceNote:"Enterprise (contact sales)",
+    url:"https://zams.com",
     badges:[],
     trending:false
   },
@@ -1051,8 +1058,8 @@ const tools = [
     name:"DataRobot",
     icon:"DR",
     iconClass:"icon-indigo",
-    desc:"Enterprise AI platform for building, deploying, and monitoring ML models at scale. AutoML and MLOps combined.",
-    bestFor:"Enterprise ML operations, regulated industries",
+    desc:"Unified Agent Workforce Platform for enterprise. Build, deploy, and manage AI agents at scale. Evolved from AutoML/MLOps to agentic AI automation and governance.",
+    bestFor:"Enterprise AI agents, regulated industries",
     category:"data",
     catLabel:"Data & Analytics",
     catClass:"cat-data",
@@ -1113,8 +1120,8 @@ const tools = [
     name:"AutoGPT",
     icon:"AG",
     iconClass:"icon-dark",
-    desc:"Open-source autonomous AI agent framework. Chains LLM calls to accomplish complex multi-step tasks independently.",
-    bestFor:"Research, autonomous task execution",
+    desc:"Open-source AI agent platform by Significant Gravitas. Build, deploy, and manage AI agents with a visual workflow editor. Self-hostable + cloud beta. Full agent platform with marketplace.",
+    bestFor:"AI agent building, autonomous task execution",
     category:"automation",
     catLabel:"Automation & Agents",
     catClass:"cat-automation",
@@ -1167,8 +1174,8 @@ const tools = [
     priceNote:"Free (open source) / Pro plans",
     url:"https://openclaw.com",
     badges:["hot","new"],
-    trending:true,
-    trendRank:10
+    trending:false,
+    trendRank:null
   },
 
   // ─── SEARCH & RESEARCH ───
@@ -1191,8 +1198,8 @@ const tools = [
     name:"You.com",
     icon:"Yu",
     iconClass:"icon-purple",
-    desc:"AI search engine with multiple AI agents for different tasks — research, coding, writing, and image creation.",
-    bestFor:"Multi-modal AI search, privacy-focused",
+    desc:"AI search API platform. Provides web search, content extraction, and research APIs for AI agents and LLMs. Powers enterprise AI systems including DuckDuckGo's breaking news. Consumer search interface also available.",
+    bestFor:"AI developers building agents, LLM-powered apps, enterprise search",
     category:"search",
     catLabel:"Search & Research",
     catClass:"cat-search",
@@ -1221,13 +1228,13 @@ const tools = [
     name:"Elicit",
     icon:"El",
     iconClass:"icon-green",
-    desc:"AI research assistant that finds, summarizes, and extracts data from academic papers using language models.",
+    desc:"AI research assistant used by 5M+ researchers. Finds, summarizes, and extracts data from academic papers with systematic review workflows.",
     bestFor:"Academic research, literature review",
     category:"search",
     catLabel:"Search & Research",
     catClass:"cat-search",
     pricing:"freemium",
-    priceNote:"Free / $12/mo Plus",
+    priceNote:"Free / $49/mo Pro / $169/mo Scale",
     url:"https://elicit.com",
     badges:[],
     trending:false
@@ -1342,10 +1349,10 @@ const tools = [
 
   // ─── SPECIALIZED / NICHE ───
   {
-    name:"Nano Banana (Gemini Flash Image)",
+    name:"Nano Banana 2 (Gemini 3 Flash Image)",
     icon:"🍌",
     iconClass:"icon-yellow",
-    desc:"Google's Gemini 2.5 Flash image generation/editing model (codename 'Nano Banana'). Native multimodal with fast image gen, editing, and enhanced text rendering.",
+    desc:"Google's Gemini 3 family image generation/editing model. Nano Banana 2 adds real-time web search-powered images, 2K/4K upscaling, and premium features. Also available as Nano Banana Pro (Gemini 3 Pro Image).",
     bestFor:"Fast AI image generation & editing via API",
     category:"specialized",
     catLabel:"Specialized",
@@ -1359,23 +1366,23 @@ const tools = [
   {
     name:"Banana.dev",
     icon:"🍌",
-    iconClass:"icon-yellow",
-    desc:"Serverless GPU inference platform for ML models. Deploy models to production with autoscaling, pay only for compute used.",
-    bestFor:"ML model deployment, serverless inference",
+    iconClass:"icon-red",
+    desc:"Serverless GPU inference platform — <strong>shut down March 31, 2024</strong>. No longer available. See Replicate or Modal for alternatives.",
+    bestFor:"N/A — discontinued",
     category:"specialized",
     catLabel:"Specialized",
     catClass:"cat-specialized",
     pricing:"paid",
-    priceNote:"Pay-per-use GPU pricing",
+    priceNote:"Shut down March 2024",
     url:"https://banana.dev",
-    badges:[],
+    badges:["discontinued"],
     trending:false
   },
   {
     name:"Replicate",
     icon:"Re",
     iconClass:"icon-blue",
-    desc:"Run open-source ML models in the cloud via API. Thousands of community models with simple deployment and scaling.",
+    desc:"Run open-source ML models in the cloud via API. Acquired by Cloudflare (Nov 2025) — same API, now with Cloudflare's infrastructure backing. Thousands of community models.",
     bestFor:"Running open-source models via API",
     category:"specialized",
     catLabel:"Specialized",
@@ -1458,6 +1465,8 @@ function createCardHTML(tool, isTrending) {
     if(b==="hot") return '<span class="badge badge-hot">🔥 Hot</span>';
     if(b==="new") return '<span class="badge badge-new">✨ New</span>';
     if(b==="trending") return '<span class="badge badge-trending">📈 Trending</span>';
+    if(b==="discontinued") return '<span class="badge badge-discontinued">⛔ Discontinued</span>';
+    if(b==="warning") return '<span class="badge badge-warning">⚠️ Status Unknown</span>';
     return '';
   }).join('');
 
