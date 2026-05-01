@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>NOLA Guide</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;background:#0f0a1e;color:#e8e2f0;line-height:1.5;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);-webkit-font-smoothing:antialiased}
+  .hero{background:linear-gradient(160deg,#1a0f2e 0%,#2d1b4e 60%,#4a2060 100%);padding:28px 20px 24px;text-align:center;border-bottom:2px solid #c9a84c}
+  .hero h1{font-size:34px;font-weight:800;color:#c9a84c;letter-spacing:1px;margin-bottom:4px}
+  .hero .sub{font-size:14px;color:#d4c4f0;margin-bottom:12px}
+  .hero .home{display:inline-block;background:rgba(0,0,0,0.35);padding:9px 14px;border-radius:10px;font-size:12px;color:#c9a84c;border:1px solid rgba(201,168,76,0.3)}
+  .hero .home strong{color:#fff;display:block;margin-bottom:2px}
+
+  .tabs{position:sticky;top:0;background:#0f0a1e;z-index:1000;display:flex;overflow-x:auto;border-bottom:1px solid rgba(201,168,76,0.2);-webkit-overflow-scrolling:touch}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{padding:13px 16px;white-space:nowrap;color:#8a7ca0;font-size:13px;font-weight:600;border-bottom:2px solid transparent;cursor:pointer;flex-shrink:0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
+  .tab.active{color:#c9a84c;border-bottom-color:#c9a84c}
+
+  .section{display:none;padding:18px 14px 80px}
+  .section.active{display:block}
+  #map-section.active{padding:0}
+  .section-intro{font-size:14px;color:#b8a8d0;margin-bottom:16px;line-height:1.55;font-style:italic}
+
+  /* MAP */
+  #map{height:calc(100vh - 200px);min-height:400px;width:100%}
+  .map-controls{padding:12px 14px;background:#1a0f2e;border-bottom:1px solid rgba(201,168,76,0.2)}
+  .filter-row{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .filter-row::-webkit-scrollbar{display:none}
+  .filter{padding:6px 12px;border-radius:14px;background:rgba(201,168,76,0.1);color:#c9a84c;font-size:12px;font-weight:600;border:1px solid rgba(201,168,76,0.3);white-space:nowrap;cursor:pointer;font-family:inherit;flex-shrink:0}
+  .filter.active{background:#c9a84c;color:#1a0f2e}
+  .leaflet-popup-content-wrapper{background:#1d1535;color:#fff;border-radius:10px;border:1px solid #c9a84c}
+  .leaflet-popup-tip{background:#1d1535}
+  .leaflet-popup-content{margin:10px 12px;font-family:-apple-system,sans-serif}
+  .popup-name{color:#c9a84c;font-weight:700;font-size:14px;margin-bottom:3px}
+  .popup-addr{font-size:11px;color:#b8a8d0;margin-bottom:6px}
+  .popup-notes{font-size:12px;color:#e8e2f0;line-height:1.4;margin-bottom:8px}
+  .popup-btns{display:flex;gap:6px}
+  .popup-btn{flex:1;padding:6px 8px;background:#c9a84c;color:#1a0f2e;text-decoration:none;border-radius:6px;font-size:11px;font-weight:600;text-align:center}
+  .popup-btn.secondary{background:rgba(201,168,76,0.15);color:#c9a84c;border:1px solid rgba(201,168,76,0.3)}
+
+  /* SHOP CARDS */
+  .shop{background:linear-gradient(135deg,#1d1535 0%,#261b40 100%);border-radius:13px;margin-bottom:12px;overflow:hidden;border:1px solid rgba(201,168,76,0.15)}
+  .shop.warning{border-color:rgba(255,80,80,0.4)}
+  .shop.top-pick{border-color:#c9a84c}
+  .shop-header{padding:13px 15px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;-webkit-user-select:none}
+  .shop-name{font-size:15px;font-weight:700;color:#fff;flex:1;line-height:1.3}
+  .shop.warning .shop-name{color:#ff9090}
+  .top-badge{display:inline-block;background:#c9a84c;color:#1a0f2e;font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;letter-spacing:0.5px}
+  .chevron{color:#c9a84c;font-size:20px;margin-left:8px;flex-shrink:0;transition:transform 0.25s}
+  .shop.open .chevron{transform:rotate(90deg)}
+  .shop-body{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
+  .shop.open .shop-body{max-height:600px}
+  .shop-body-inner{padding:0 15px 15px;border-top:1px solid rgba(201,168,76,0.1);padding-top:11px}
+  .info-row{display:flex;align-items:flex-start;margin-bottom:6px;font-size:13px;color:#c4b8d8}
+  .info-row .icon{margin-right:8px;width:14px;flex-shrink:0}
+  .info-row .text{flex:1;line-height:1.4}
+  .notes{margin-top:9px;font-size:14px;color:#d8d0e8;line-height:1.5}
+  .shop.warning .notes{color:#ffb0b0}
+  .actions{display:flex;gap:8px;margin-top:12px}
+  .btn{flex:1;padding:10px;background:rgba(201,168,76,0.15);color:#c9a84c;border:1px solid rgba(201,168,76,0.3);border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;text-align:center}
+  .btn.primary{background:#c9a84c;color:#1a0f2e}
+
+  .street{background:linear-gradient(135deg,#1d1535 0%,#261b40 100%);border-left:4px solid #c9a84c;border-radius:10px;padding:13px 15px;margin-bottom:11px}
+  .street h3{color:#fff;font-size:15px;margin-bottom:5px}
+  .street p{font-size:13px;color:#c4b8d8;line-height:1.5}
+
+  .skip-card{background:rgba(80,20,20,0.3);border:1px solid rgba(255,80,80,0.25);border-radius:11px;padding:13px 15px;margin-bottom:9px}
+  .skip-card .name{color:#ff9090;font-weight:700;font-size:14px;margin-bottom:3px}
+  .skip-card .why{color:#d4a4a4;font-size:13px;line-height:1.4}
+
+  h2.section-title{color:#c9a84c;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:22px 0 11px;padding-bottom:5px;border-bottom:1px solid rgba(201,168,76,0.2)}
+  h2.section-title:first-child{margin-top:0}
+
+  .footer{text-align:center;color:#6a5a80;font-size:11px;padding:24px 16px 16px;font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>NEW ORLEANS</h1>
+  <div class="sub">Books · Witchy · Oddities · Coffee</div>
+  <div class="home"><strong>🏠 The Alexandre</strong>336 Camp St, NOLA 70130</div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-section="map-section">🗺️ Map</button>
+  <button class="tab" data-section="books">📚 Books</button>
+  <button class="tab" data-section="witchy">🔮 Witchy</button>
+  <button class="tab" data-section="oddities">💀 Oddities</button>
+  <button class="tab" data-section="coffee">☕ Coffee</button>
+  <button class="tab" data-section="streets">🚶 Streets</button>
+  <button class="tab" data-section="skip">🚫 Skip</button>
+</div>
+
+<!-- MAP -->
+<div class="section active" id="map-section">
+  <div class="map-controls">
+    <div class="filter-row">
+      <button class="filter active" data-filter="all">All</button>
+      <button class="filter" data-filter="books">📚 Books</button>
+      <button class="filter" data-filter="witchy">🔮 Witchy</button>
+      <button class="filter" data-filter="oddities">💀 Oddities</button>
+      <button class="filter" data-filter="coffee">☕ Coffee</button>
+    </div>
+  </div>
+  <div id="map"></div>
+</div>
+
+<!-- BOOKS -->
+<div class="section" id="books">
+  <div class="section-intro">The French Quarter has the densest cluster of independent used bookshops in any U.S. neighborhood.</div>
+  <div class="shop top-pick" data-shop><div class="shop-header"><div class="shop-name">Crescent City Books<span class="top-badge">SERIOUS</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">240 Chartres St — ~10 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 11 AM – 7 PM</span></div><div class="notes">ABAA-affiliated antiquarian bookseller since 1992. Two floors, rare maps, signed firsts, esoterica. Resident cat named Isabella.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Crescent+City+Books&address=240+Chartres+St,+New+Orleans,+LA+70130" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Crescent+City+Books+240+Chartres+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Beckham's BookShop</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">228 Decatur St — ~10 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 10 AM – 7 PM</span></div><div class="notes">Oldest bookshop in the Quarter (1967). 50,000+ books, vinyl upstairs, dogs and beer welcome.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Beckhams+BookShop&address=228+Decatur+St,+New+Orleans,+LA+70130" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Beckhams+BookShop+228+Decatur+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Arcadian Books & Prints<span class="top-badge">CASH ONLY</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">714 Orleans Ave — ~12 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Mon–Sat 10–5 • Closed Sunday</span></div><div class="notes">The deepest cut. Floor-to-ceiling chaos. Strong French-language and Louisiana history sections. Cash only.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Arcadian+Books&address=714+Orleans+Ave,+New+Orleans,+LA+70116" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Arcadian+Books+714+Orleans+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Faulkner House Books</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">624 Pirate's Alley — ~12 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 10 AM – 5 PM</span></div><div class="notes">Tiny but legendary — Faulkner wrote Soldiers' Pay here in 1925. Boutique first editions. Right next to St. Louis Cathedral.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Faulkner+House+Books&address=624+Pirates+Alley,+New+Orleans,+LA+70116" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Faulkner+House+Books+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Dauphine Street Books</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">818 Chartres St — ~13 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 12 PM – 7 PM</span></div><div class="notes">40-year veteran dealer Steve. Curated used books. Next door to Dark Matter Oddities — hit both.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Dauphine+Street+Books&address=818+Chartres+St,+New+Orleans,+LA+70116" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Dauphine+Street+Books+818+Chartres+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Frenchmen Art & Books<span class="top-badge">LATE NIGHT</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">600 Frenchmen St — ~20 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily until 10–11 PM</span></div><div class="notes">Open since 1978, resident black cat. One of the few bookshops open late.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Frenchmen+Art+and+Books&address=600+Frenchmen+St,+New+Orleans,+LA+70116" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Frenchmen+Art+Books+600+Frenchmen+New+Orleans" target="_blank">Google</a></div></div></div></div>
+</div>
+
+<!-- WITCHY -->
+<div class="section" id="witchy">
+  <div class="section-intro">Real practitioner shops — not Bourbon Street tourist gift stores.</div>
+  <div class="shop top-pick" data-shop><div class="shop-header"><div class="shop-name">Island of Salvation Botanica<span class="top-badge">TOP PICK</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">2372 St Claude Ave — ~10 min Lyft</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Mon–Sat 10–5 • Sun 11–5</span></div><div class="notes">THE most respected name in the city. Mambo Asogwe Sallie Ann Glassman has operated since 1995. Custom gris-gris, herbal supplies, Haitian art, psychic readings. Book a reading in advance.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Island+of+Salvation+Botanica&address=2372+St+Claude+Ave,+New+Orleans,+LA+70117" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Island+of+Salvation+Botanica+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Hex: Old World Witchery</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">1219 Decatur St — ~18 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Mon–Thu 11–9:30 • Fri–Sun 10–9:30</span></div><div class="notes">The serious witchcraft shop. Working altar on site. Spell candles, ritual oils, herbs, gris-gris, tarot. Psychic readings by practicing witches.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Hex+Old+World+Witchery&address=1219+Decatur+St,+New+Orleans,+LA+70116" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Hex+Old+World+Witchery+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Voodoo Authentica</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">612 Dumaine St — ~13 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 11 AM – 7 PM</span></div><div class="notes">Legitimate voodoo shop with real practitioner credibility. Hand-blended potion oils, ritual kits, gris-gris, readings.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Voodoo+Authentica&address=612+Dumaine+St,+New+Orleans,+LA+70116" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Voodoo+Authentica+612+Dumaine+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop warning" data-shop><div class="shop-header"><div class="shop-name">⚠️ Esoterica Occult Goods</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">621 Toulouse St — ~11 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 12 PM – 6 PM</span></div><div class="notes"><strong>Proceed with caution.</strong> Hostile owner reported. 3.1 stars. Optional — Hex covers this territory better.</div></div></div></div>
+</div>
+
+<!-- ODDITIES -->
+<div class="section" id="oddities">
+  <div class="section-intro">Vintage, taxidermy, and antique shops where locals actually shop.</div>
+  <div class="shop top-pick" data-shop><div class="shop-header"><div class="shop-name">Dark Matter Oddities<span class="top-badge">TOP PICK</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">822 Chartres St — ~13 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Wed–Mon noon–6 (til 7 wknds) • CLOSED TUES</span></div><div class="notes">Ethical taxidermy, wet specimens, Victorian memento mori, articulated skeletons. Right next door to Dauphine Street Books.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Dark+Matter+Oddities&address=822+Chartres+St,+New+Orleans,+LA+70116" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Dark+Matter+Oddities+822+Chartres+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <h2 class="section-title">Magazine Street (Lyft)</h2>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Funky Monkey</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">3102 Magazine St — Lyft</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 11 AM – 6 PM</span></div><div class="notes">Vintage clothing every era, deep archive of real Mardi Gras costumes.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Funky+Monkey&address=3102+Magazine+St,+New+Orleans,+LA+70115" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Funky+Monkey+3102+Magazine+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Magazine Antique Mall</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">3017 Magazine St — Lyft</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 12 PM – 5 PM</span></div><div class="notes">Largest antique mall in South LA — 40 dealers, 7,000 sq ft.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Magazine+Antique+Mall&address=3017+Magazine+St,+New+Orleans,+LA+70115" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Magazine+Antique+Mall+3017+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Vintage Market by Trashy Diva</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">1920 Magazine St — ~15 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily — check hours</span></div><div class="notes">Genuine 1920s–Y2K vintage clothing, jewelry, decor curated by Candice Gwinn.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Vintage+Market+Trashy+Diva&address=1920+Magazine+St,+New+Orleans,+LA+70130" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Vintage+Market+Trashy+Diva+New+Orleans" target="_blank">Google</a></div></div></div></div>
+</div>
+
+<!-- COFFEE -->
+<div class="section" id="coffee">
+  <div class="section-intro">Local roasters and indie shops. Skip Starbucks.</div>
+  <h2 class="section-title">CBD / Quarter — Walk</h2>
+  <div class="shop top-pick" data-shop><div class="shop-header"><div class="shop-name">Mr Wolf Espresso<span class="top-badge">CLOSEST</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">900 Camp St — 4 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">M–F 8–4 • S–S 9–2</span></div><div class="notes">Closest serious coffee. Best cortado in the city. Local roaster, killer morning bun. Your default morning stop.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Mr+Wolf+Espresso&address=900+Camp+St,+New+Orleans,+LA+70130" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Mr+Wolf+Espresso+900+Camp+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Fourth Wall</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">614 Gravier St — ~5 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">M–S 7–3 • Sun 8–3</span></div><div class="notes">Inside a historic theater building. Multiple seating areas, real ceramic cups, homemade pastries.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Fourth+Wall+Coffee&address=614+Gravier+St,+New+Orleans,+LA+70130" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Fourth+Wall+Coffee+614+Gravier+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Pirate King Coffee<span class="top-badge">QUIRKY</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">320 Exchange Pl — ~8 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">M–T 8–6 • F–S 7–7 • Sun 8–5</span></div><div class="notes">Fully pirate-themed coffee shop in an alley off Conti. Brown sugar cinnamon flat white, butter pecan cortado.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Pirate+King+Coffee&address=320+Exchange+Pl,+New+Orleans,+LA+70130" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Pirate+King+Coffee+320+Exchange+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">French Truck Coffee</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">217 Chartres St — ~10 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">M–F 7–5 • S–S 8–5</span></div><div class="notes">Local NOLA roaster. Reliable cappuccino, the famous "New Orleans Iced Coffee." Right next to Crescent City Books.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=French+Truck+Coffee&address=217+Chartres+St,+New+Orleans,+LA+70130" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=French+Truck+Coffee+217+Chartres+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Gospel Coffee</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">501 Tchoupitoulas St — ~5 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 7 AM – 5 PM</span></div><div class="notes">Kimpton Fontenot lobby. Cortado, chai, boozy pastries (cinnamon-pecan rum bun). Pimento cheese quiche.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Gospel+Coffee&address=501+Tchoupitoulas+St,+New+Orleans,+LA+70130" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Gospel+Coffee+501+Tchoupitoulas+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Café du Monde<span class="top-badge">REQUIRED</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">800 Decatur St — ~13 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 7:15 AM – 11 PM</span></div><div class="notes">Touristy but mandatory once. Chicory café au lait + 3 beignets covered in absurd powdered sugar. Cash only. Best at off-hours.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Cafe+du+Monde&address=800+Decatur+St,+New+Orleans,+LA+70116" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Cafe+du+Monde+800+Decatur+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <h2 class="section-title">Marigny / Bywater — Lyft</h2>
+  <div class="shop top-pick" data-shop><div class="shop-header"><div class="shop-name">only coffee<span class="top-badge">⭐ 4.9</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">1040 Esplanade Ave — ~6 min Lyft</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 7:30–5</span></div><div class="notes">Walk-up courtyard coffee. Lavender-marshmallow cappuccino. Try the "Waffolino" — espresso in an edible waffle cone.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=only+coffee&address=1040+Esplanade+Ave,+New+Orleans,+LA+70116" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=only+coffee+1040+Esplanade+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop top-pick" data-shop><div class="shop-header"><div class="shop-name">HONEY'S<span class="top-badge">⭐ 4.9</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">2400 St Claude Ave — ~10 min Lyft</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">M–S 7–8 • Sun 7–3</span></div><div class="notes">Cozy cafe with locally roasted beans. Lavender lemonade is famous. Right near Island of Salvation Botanica.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Honeys+Coffee&address=2400+St+Claude+Ave,+New+Orleans,+LA+70117" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Honeys+2400+St+Claude+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Ayu Bakehouse<span class="top-badge">PASTRIES</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">801 Frenchmen St — ~8 min Lyft</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">M–T 8–2 • W–S 8–3:30</span></div><div class="notes">Best bakery in NOLA. Croissants, kaya buns, chocolate babka knot. King cake is celebrity-chef-approved.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Ayu+Bakehouse&address=801+Frenchmen+St,+New+Orleans,+LA+70117" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Ayu+Bakehouse+801+Frenchmen+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">St. Coffee</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">2718 St Claude Ave — ~12 min Lyft</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 7–4</span></div><div class="notes">7th Ward shop with a back patio garden. House-made syrups, locally made bagels, best chai in town.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=St+Coffee&address=2718+St+Claude+Ave,+New+Orleans,+LA+70117" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=St+Coffee+2718+St+Claude+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Pond Coffee</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">2700 Chartres St — ~10 min Lyft</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 8–2</span></div><div class="notes">Hidden gem inside Small Mart. Pretty Coffee beans, smooth drip, excellent espresso.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Pond+Coffee&address=2700+Chartres+St,+New+Orleans,+LA+70117" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Pond+Coffee+2700+Chartres+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <h2 class="section-title">Magazine Street</h2>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">Mojo Coffee House</div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">1500 Magazine St — ~10 min walk</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">Daily 6 AM – 7 PM</span></div><div class="notes">Local roaster, opens at 6 AM, plenty of seating. Closest "real" coffee on Magazine.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=Mojo+Coffee&address=1500+Magazine+St,+New+Orleans,+LA+70130" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Mojo+Coffee+1500+Magazine+New+Orleans" target="_blank">Google</a></div></div></div></div>
+  <div class="shop" data-shop><div class="shop-header"><div class="shop-name">The Vintage<span class="top-badge">BEIGNETS</span></div><div class="chevron">›</div></div><div class="shop-body"><div class="shop-body-inner"><div class="info-row"><span class="icon">📍</span><span class="text">3121 Magazine St — Lyft</span></div><div class="info-row"><span class="icon">🕐</span><span class="text">S–T 8–10 • F–S 8–11</span></div><div class="notes">Coffee + cocktail bar hybrid. Beignet flights, the alt to Cafe du Monde. $7 drinks 8–11 AM.</div><div class="actions"><a class="btn primary" href="https://maps.apple.com/?q=The+Vintage+NOLA&address=3121+Magazine+St,+New+Orleans,+LA+70115" target="_blank">Apple Maps</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=The+Vintage+3121+Magazine+New+Orleans" target="_blank">Google</a></div></div></div></div>
+</div>
+
+<!-- STREETS -->
+<div class="section" id="streets">
+  <div class="section-intro">Where the shops cluster.</div>
+  <div class="street"><h3>Chartres St — 200 to 800 blocks</h3><p>Best concentrated walk. Crescent City Books (240), Beckham's one block over (228 Decatur), Faulkner House (Pirate's Alley), Dauphine Street Books (818), Dark Matter Oddities (822). About 1.5 miles.</p></div>
+  <div class="street"><h3>Royal St — 300 to 800 blocks</h3><p>The antique corridor. 11 AM–4 PM pedestrian-only with buskers. Keil's Antiques (1899), M.S. Rau (1912). More elegant than Bourbon.</p></div>
+  <div class="street"><h3>Magazine St — 1900 to 3200 blocks</h3><p>Where locals shop. Best independent boutiques, antiques, vintage clothing. Take the 11 Magazine bus between clusters.</p></div>
+  <div class="street"><h3>Frenchmen St — 500 to 700 blocks</h3><p>Live music + Frenchmen Art & Books open until 11 PM. Local alternative to Bourbon.</p></div>
+  <div class="street"><h3>St. Claude Ave — Marigny → Bywater</h3><p>Where Island of Salvation Botanica lives (in the Healing Center). Bohemian spine of the city.</p></div>
+</div>
+
+<!-- SKIP -->
+<div class="section" id="skip">
+  <div class="section-intro">Tourist traps. Avoid.</div>
+  <div class="skip-card"><div class="name">Marie Laveau's House of Voodoo (739 Bourbon)</div><div class="why">Atmospheric gift shop, not where practitioners shop.</div></div>
+  <div class="skip-card"><div class="name">Reverend Zombie's House of Voodoo</div><div class="why">Tourist gift store with some legitimate items, mostly schlock.</div></div>
+  <div class="skip-card"><div class="name">Voodoo Bone Lady, Sassy Magick Noir, Vampire Apothecary</div><div class="why">Royal 700–800 blocks. Theatrical and tourist-priced.</div></div>
+  <div class="skip-card"><div class="name">Vintage 329 (Royal St)</div><div class="why">Disputed authenticity on autographs and jewelry. Get anything signed independently authenticated.</div></div>
+  <div class="skip-card"><div class="name">Anything on Bourbon with "voodoo" in neon</div><div class="why">You already know.</div></div>
+</div>
+
+<div class="footer">Compiled by Winston · NOLA 2026<br>Tap pins on map · Tap any shop to expand</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.section;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(target).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    if (target === 'map-section' && window._map) {
+      setTimeout(() => window._map.invalidateSize(), 100);
+    }
+  });
+});
+
+// Shop expand
+document.querySelectorAll('[data-shop]').forEach(shop => {
+  shop.querySelector('.shop-header').addEventListener('click', () => {
+    shop.classList.toggle('open');
+  });
+});
+
+// MAP DATA
+const HOTEL = {lat: 29.9461, lng: -90.0699, name: "🏠 The Alexandre", addr: "336 Camp St"};
+const PLACES = [
+  {cat: 'books', lat: 29.9542, lng: -90.0666, name: "Crescent City Books", addr: "240 Chartres St", notes: "ABAA antiquarian. Cat named Isabella.", q: "Crescent+City+Books+New+Orleans"},
+  {cat: 'books', lat: 29.9533, lng: -90.0658, name: "Beckham's BookShop", addr: "228 Decatur St", notes: "Oldest in Quarter (1967). 50,000+ books.", q: "Beckhams+BookShop+New+Orleans"},
+  {cat: 'books', lat: 29.9585, lng: -90.0648, name: "Arcadian Books", addr: "714 Orleans Ave", notes: "Cash only. Closed Sundays. Floor-to-ceiling chaos.", q: "Arcadian+Books+New+Orleans"},
+  {cat: 'books', lat: 29.9580, lng: -90.0642, name: "Faulkner House Books", addr: "624 Pirate's Alley", notes: "Tiny, legendary. Faulkner wrote here in 1925.", q: "Faulkner+House+Books+New+Orleans"},
+  {cat: 'books', lat: 29.9585, lng: -90.0627, name: "Dauphine Street Books", addr: "818 Chartres St", notes: "Curated used books. Next to Dark Matter.", q: "Dauphine+Street+Books+New+Orleans"},
+  {cat: 'books', lat: 29.9637, lng: -90.0568, name: "Frenchmen Art & Books", addr: "600 Frenchmen St", notes: "Open until 11 PM. Black cat.", q: "Frenchmen+Art+Books+New+Orleans"},
+  {cat: 'witchy', lat: 29.9687, lng: -90.0525, name: "Island of Salvation Botanica", addr: "2372 St Claude Ave", notes: "TOP PICK. Real Vodou. Sallie Ann Glassman. Book reading ahead.", q: "Island+of+Salvation+Botanica+New+Orleans"},
+  {cat: 'witchy', lat: 29.9611, lng: -90.0591, name: "Hex: Old World Witchery", addr: "1219 Decatur St", notes: "Real witchcraft shop. Working altar. Open until 9:30 PM.", q: "Hex+Old+World+Witchery+New+Orleans"},
+  {cat: 'witchy', lat: 29.9592, lng: -90.0627, name: "Voodoo Authentica", addr: "612 Dumaine St", notes: "Legit voodoo shop. Hand-blended oils, gris-gris, readings.", q: "Voodoo+Authentica+New+Orleans"},
+  {cat: 'witchy', lat: 29.9569, lng: -90.0649, name: "⚠️ Esoterica", addr: "621 Toulouse St", notes: "Hostile owner reported. 3.1 stars. Skip — Hex is better.", q: "Esoterica+Occult+Goods+New+Orleans"},
+  {cat: 'oddities', lat: 29.9587, lng: -90.0626, name: "Dark Matter Oddities", addr: "822 Chartres St", notes: "TOP PICK. Ethical taxidermy, oddities. CLOSED TUESDAYS.", q: "Dark+Matter+Oddities+New+Orleans"},
+  {cat: 'oddities', lat: 29.9244, lng: -90.0860, name: "Funky Monkey", addr: "3102 Magazine St", notes: "Vintage clothing, real Mardi Gras costumes.", q: "Funky+Monkey+New+Orleans"},
+  {cat: 'oddities', lat: 29.9251, lng: -90.0851, name: "Magazine Antique Mall", addr: "3017 Magazine St", notes: "Largest antique mall in S. Louisiana. 40 dealers.", q: "Magazine+Antique+Mall+New+Orleans"},
+  {cat: 'oddities', lat: 29.9296, lng: -90.0772, name: "Vintage Market by Trashy Diva", addr: "1920 Magazine St", notes: "1920s–Y2K vintage clothing curated by Candice Gwinn.", q: "Vintage+Market+Trashy+Diva+New+Orleans"},
+  {cat: 'coffee', lat: 29.9436, lng: -90.0709, name: "Mr Wolf Espresso", addr: "900 Camp St", notes: "CLOSEST. Best cortado in NOLA. Your default morning stop.", q: "Mr+Wolf+Espresso+New+Orleans"},
+  {cat: 'coffee', lat: 29.9510, lng: -90.0693, name: "Fourth Wall", addr: "614 Gravier St", notes: "Historic theater building. Beautiful space.", q: "Fourth+Wall+Coffee+New+Orleans"},
+  {cat: 'coffee', lat: 29.9550, lng: -90.0668, name: "Pirate King Coffee", addr: "320 Exchange Pl", notes: "Pirate-themed alley shop. Brown sugar cinnamon flat white.", q: "Pirate+King+Coffee+New+Orleans"},
+  {cat: 'coffee', lat: 29.9539, lng: -90.0671, name: "French Truck Coffee", addr: "217 Chartres St", notes: "Local roaster. NOLA Iced Coffee. Next to Crescent City Books.", q: "French+Truck+Coffee+217+Chartres+New+Orleans"},
+  {cat: 'coffee', lat: 29.9486, lng: -90.0672, name: "Gospel Coffee", addr: "501 Tchoupitoulas St", notes: "Kimpton hotel lobby. Boozy pastries, pimento quiche.", q: "Gospel+Coffee+New+Orleans"},
+  {cat: 'coffee', lat: 29.9576, lng: -90.0618, name: "Café du Monde", addr: "800 Decatur St", notes: "REQUIRED once. Beignets + chicory au lait. Cash only.", q: "Cafe+du+Monde+800+Decatur"},
+  {cat: 'coffee', lat: 29.9656, lng: -90.0636, name: "only coffee", addr: "1040 Esplanade Ave", notes: "⭐4.9. Courtyard espresso. Try the Waffolino.", q: "only+coffee+1040+Esplanade+New+Orleans"},
+  {cat: 'coffee', lat: 29.9687, lng: -90.0520, name: "HONEY'S", addr: "2400 St Claude Ave", notes: "⭐4.9. Local roaster, lavender lemonade. Near Botanica.", q: "Honeys+2400+St+Claude+New+Orleans"},
+  {cat: 'coffee', lat: 29.9657, lng: -90.0578, name: "Ayu Bakehouse", addr: "801 Frenchmen St", notes: "BEST BAKERY IN NOLA. Croissants, kaya buns, king cake.", q: "Ayu+Bakehouse+New+Orleans"},
+  {cat: 'coffee', lat: 29.9684, lng: -90.0488, name: "St. Coffee", addr: "2718 St Claude Ave", notes: "7th Ward, back patio garden, best chai in town.", q: "St+Coffee+2718+St+Claude+New+Orleans"},
+  {cat: 'coffee', lat: 29.9635, lng: -90.0507, name: "Pond Coffee", addr: "2700 Chartres St", notes: "Inside Small Mart. Pretty Coffee beans, smooth drip.", q: "Pond+Coffee+New+Orleans"},
+  {cat: 'coffee', lat: 29.9343, lng: -90.0723, name: "Mojo Coffee House", addr: "1500 Magazine St", notes: "Opens at 6 AM. Closest real coffee on Magazine.", q: "Mojo+Coffee+1500+Magazine+New+Orleans"},
+  {cat: 'coffee', lat: 29.9244, lng: -90.0860, name: "The Vintage", addr: "3121 Magazine St", notes: "Beignet flights! $7 breakfast cocktails 8-11 AM.", q: "The+Vintage+3121+Magazine+New+Orleans"},
+];
+
+const COLORS = {books: '#4A90E2', witchy: '#9B59B6', oddities: '#E74C3C', coffee: '#C9A84C'};
+const ICONS = {books: '📚', witchy: '🔮', oddities: '💀', coffee: '☕'};
+
+function makeIcon(cat) {
+  const color = COLORS[cat] || '#888';
+  const emoji = ICONS[cat] || '📍';
+  return L.divIcon({
+    html: `<div style="background:${color};width:32px;height:32px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center"><span style="transform:rotate(45deg);font-size:16px">${emoji}</span></div>`,
+    className: 'custom-pin',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -30]
+  });
+}
+
+function makeHotelIcon() {
+  return L.divIcon({
+    html: `<div style="background:#fff;color:#4A2060;width:38px;height:38px;border-radius:50%;border:3px solid #C9A84C;box-shadow:0 2px 8px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;font-size:18px">🏠</div>`,
+    className: 'custom-pin',
+    iconSize: [38, 38],
+    iconAnchor: [19, 19],
+    popupAnchor: [0, -20]
+  });
+}
+
+const map = L.map('map').setView([29.954, -90.062], 14);
+window._map = map;
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  attribution: '© OpenStreetMap, © CARTO',
+  maxZoom: 19
+}).addTo(map);
+
+// Hotel
+L.marker([HOTEL.lat, HOTEL.lng], {icon: makeHotelIcon()})
+  .addTo(map)
+  .bindPopup(`<div class="popup-name">${HOTEL.name}</div><div class="popup-addr">${HOTEL.addr}</div>`);
+
+const markers = [];
+PLACES.forEach(p => {
+  const marker = L.marker([p.lat, p.lng], {icon: makeIcon(p.cat)})
+    .bindPopup(`
+      <div class="popup-name">${p.name}</div>
+      <div class="popup-addr">${ICONS[p.cat]} ${p.addr}</div>
+      <div class="popup-notes">${p.notes}</div>
+      <div class="popup-btns">
+        <a class="popup-btn" href="https://maps.apple.com/?q=${p.q}" target="_blank">Apple</a>
+        <a class="popup-btn secondary" href="https://www.google.com/maps/search/?api=1&query=${p.q}" target="_blank">Google</a>
+      </div>
+    `);
+  marker.cat = p.cat;
+  markers.push(marker);
+  marker.addTo(map);
+});
+
+// Filters
+document.querySelectorAll('.filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    markers.forEach(m => {
+      if (filter === 'all' || m.cat === filter) {
+        if (!map.hasLayer(m)) m.addTo(map);
+      } else {
+        if (map.hasLayer(m)) map.removeLayer(m);
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
